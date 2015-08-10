@@ -1,0 +1,8 @@
+h_male,h_male,h_male,10
+h_male,h_male,h_female,2318
+h_male,h_female,h_male,2318
+h_male,h_female,h_female,2998
+h_female,h_male,h_male,2318
+h_female,h_male,h_female,2998
+h_female,h_female,h_male,2998
+h_female,h_female,h_female,106

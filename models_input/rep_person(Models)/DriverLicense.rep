@@ -1,0 +1,237 @@
+// This file has automatically been generated.
+// 07/29/14 15:00:53
+// Michel Bierlaire, EPFL
+
+biogeme 2.2 [Thu Mar 15 14:58:02 WEST 2012]
+Michel Bierlaire, EPFL
+
+   Logit Model for DriverLicense
+   2 alternatives: lYes, lNo
+
+                         Model: Multinomial Logit
+Number of estimated parameters: 18
+        Number of observations: 309511
+         Number of individuals: 309511
+           Null log-likelihood: -214536.677
+            Cte log-likelihood: -198510.341
+           Init log-likelihood: -214536.677
+          Final log-likelihood: -156874.577
+         Likelihood ratio test: 115324.200
+                    Rho-square: 0.269
+           Adjusted rho-square: 0.269
+           Final gradient norm: +1.097e+000
+                    Diagnostic: Convergence reached...
+                    Iterations: 10
+                      Run time: 00:50
+           Variance-covariance: from analytical hessian
+                   Sample file: Sample3.dat
+
+Utility parameters
+******************
+Name                         Value  Std err   t-test  p-val Rob. std err Rob. t-test Rob. p-val 
+----                         -----  -------   ------  ----- ------------ ----------- ---------- 
+ASC_lNo                      -0.833 0.0178    -46.72  0.00  0.0185       -45.01      0.00       
+ASC_lYes                     0.00   --fixed--                                                   
+B_lNo_PT                     -0.220 0.0199    -11.02  0.00  0.0218       -10.05      0.00       
+B_lNo_apart                  0.693  0.0114    60.57   0.00  0.0116       59.52       0.00       
+B_lNo_eighteen               -0.621 0.0180    -34.44  0.00  0.0194       -32.08      0.00       
+B_lNo_fortyone               -1.80  0.0163    -110.19 0.00  0.0176       -102.11     0.00       
+B_lNo_homeFT                 -1.35  0.0393    -34.29  0.00  0.0431       -31.26      0.00       
+B_lNo_homePT                 -1.26  0.0611    -20.65  0.00  0.0669       -18.86      0.00       
+B_lNo_manConst               -1.95  0.0281    -69.36  0.00  0.0303       -64.30      0.00       
+B_lNo_oneAdultChildren       2.17   0.0478    45.34   0.00  0.0444       48.82       0.00       
+B_lNo_oneCar                 -0.392 0.0118    -33.24  0.00  0.0126       -31.24      0.00       
+B_lNo_retail                 -1.22  0.0153    -79.87  0.00  0.0159       -77.18      0.00       
+B_lNo_sixteen                0.811  0.0258    31.41   0.00  0.0276       29.36       0.00       
+B_lNo_twentysix              -1.52  0.0271    -56.10  0.00  0.0294       -51.75      0.00       
+B_lNo_twoAdults              -0.103 0.0184    -5.61   0.00  0.0179       -5.74       0.00       
+B_lNo_twoAdultsChildren      1.85   0.0195    94.91   0.00  0.0187       99.29       0.00       
+B_lNo_twoCars                -0.743 0.0122    -60.91  0.00  0.0122       -60.76      0.00       
+B_lNo_twoPlusAdults          1.02   0.0184    55.37   0.00  0.0182       56.05       0.00       
+B_lNo_twoPlusAdultsChildren  2.17   0.0199    109.04  0.00  0.0193       112.73      0.00       
+B_lYes_PT                    0.00   --fixed--                                                   
+B_lYes_apart                 0.00   --fixed--                                                   
+B_lYes_eighteen              0.00   --fixed--                                                   
+B_lYes_eleven                0.00   --fixed--                                                   
+B_lYes_fortyone              0.00   --fixed--                                                   
+B_lYes_fourteen              0.00   --fixed--                                                   
+B_lYes_homeFT                0.00   --fixed--                                                   
+B_lYes_homePT                0.00   --fixed--                                                   
+B_lYes_manConst              0.00   --fixed--                                                   
+B_lYes_oneAdultChildren      0.00   --fixed--                                                   
+B_lYes_oneCar                0.00   --fixed--                                                   
+B_lYes_retail                0.00   --fixed--                                                   
+B_lYes_sixteen               0.00   --fixed--                                                   
+B_lYes_twentysix             0.00   --fixed--                                                   
+B_lYes_twoAdults             0.00   --fixed--                                                   
+B_lYes_twoAdultsChildren     0.00   --fixed--                                                   
+B_lYes_twoCars               0.00   --fixed--                                                   
+B_lYes_twoPlusAdults         0.00   --fixed--                                                   
+B_lYes_twoPlusAdultsChildren 0.00   --fixed--                                                   
+
+Utility functions
+*****************
+1	A1_lYes	one	ASC_lYes * one + B_lYes_oneAdultChildren * oneAdultChildren + B_lYes_twoAdults * twoAdults + B_lYes_twoAdultsChildren * twoAdultsChildren + B_lYes_twoPlusAdults * twoPlusAdults + B_lYes_twoPlusAdultsChildren * twoPlusAdultsChildren + B_lYes_apart * apart + B_lYes_oneCar * oneCar + B_lYes_twoCars * twoCars + B_lYes_homeFT * homeFT + B_lYes_homePT * homePT + B_lYes_PT * PT + B_lYes_manConst * manConst + B_lYes_retail * retail + B_lYes_eleven * eleven + B_lYes_fourteen * fourteen + B_lYes_sixteen * sixteen + B_lYes_eighteen * eighteen + B_lYes_twentysix * twentysix + B_lYes_fortyone * fortyone
+2	A2_lNo	one	ASC_lNo * one + B_lNo_oneAdultChildren * oneAdultChildren + B_lNo_twoAdults * twoAdults + B_lNo_twoAdultsChildren * twoAdultsChildren + B_lNo_twoPlusAdults * twoPlusAdults + B_lNo_twoPlusAdultsChildren * twoPlusAdultsChildren + B_lNo_apart * apart + B_lNo_oneCar * oneCar + B_lNo_twoCars * twoCars + B_lNo_homeFT * homeFT + B_lNo_homePT * homePT + B_lNo_PT * PT + B_lNo_manConst * manConst + B_lNo_retail * retail + B_lNo_sixteen * sixteen + B_lNo_eighteen * eighteen + B_lNo_twentysix * twentysix + B_lNo_fortyone * fortyone
+
+
+Correlation of coefficients
+***************************
+Coeff1                  Coeff2                      Covariance Correlation t-test    Rob. covar. Rob. correl. Rob. t-test   
+------                  ------                      ---------- ----------- ------    ----------- ------------ -----------   
+B_lNo_oneAdultChildren  B_lNo_twoPlusAdultsChildren 0.000251   0.264       -0.13   * 0.000241    0.282        -0.14       * 
+B_lNo_homePT            B_lNo_retail                -3.46e-005 -0.0370     -0.61   * 3.93e-005   0.0370       -0.57       * 
+B_lNo_homeFT            B_lNo_homePT                2.82e-005  0.0117      -1.19   * 1.50e-006   0.000520     -1.08       * 
+B_lNo_homeFT            B_lNo_retail                -4.26e-005 -0.0708     -2.88     3.53e-005   0.0516       -2.76         
+B_lNo_homeFT            B_lNo_twentysix             9.40e-006  0.00882     3.63      7.83e-005   0.0618       3.41          
+ASC_lNo                 B_lNo_twoCars               -6.38e-005 -0.293      -3.70     -9.17e-005  -0.405       -3.47         
+B_lNo_homePT            B_lNo_twentysix             7.58e-006  0.00458     3.87      3.81e-005   0.0194       3.56          
+B_lNo_apart             B_lNo_sixteen               5.50e-008  0.000186    -4.18     1.34e-006   0.00418      -3.95         
+B_lNo_PT                B_lNo_twoAdults             -2.47e-006 -0.00676    -4.29     -5.54e-006  -0.0141      -4.09         
+B_lNo_fortyone          B_lNo_manConst              -4.33e-006 -0.00948    4.66      5.85e-005   0.110        4.56          
+B_lNo_eighteen          B_lNo_twoCars               1.41e-005  0.0641      5.79      2.13e-005   0.0898       5.57          
+B_lNo_sixteen           B_lNo_twoPlusAdults         -5.80e-005 -0.122      -6.18     -7.09e-005  -0.141       -5.89         
+ASC_lNo                 B_lNo_homePT                -2.43e-005 -0.0223     6.70      -2.93e-005  -0.0236      6.14          
+B_lNo_oneAdultChildren  B_lNo_twoAdultsChildren     0.000250   0.268       6.76      0.000236    0.285        7.32          
+B_lNo_PT                B_lNo_oneCar                2.05e-006  0.00872     7.50      7.06e-006   0.0257       6.94          
+B_lNo_homePT            B_lNo_twoCars               5.64e-006  0.00756     -8.34     4.79e-006   0.00585      -7.64         
+ASC_lNo                 B_lNo_eighteen              -1.38e-006 -0.00430    -8.36     -8.18e-006  -0.0228      -7.84         
+B_lNo_fortyone          B_lNo_homePT                -3.71e-006 -0.00372    -8.42     2.17e-005   0.0185       -7.74         
+B_lNo_fortyone          B_lNo_twentysix             3.12e-005  0.0708      -8.96     2.91e-005   0.0564       -8.22         
+B_lNo_retail            B_lNo_twentysix             -7.86e-006 -0.0189     9.47      2.46e-005   0.0527       9.10          
+B_lNo_eighteen          B_lNo_homePT                1.08e-005  0.00976     10.09     2.92e-005   0.0225       9.26          
+B_lNo_homePT            B_lNo_manConst              3.04e-006  0.00177     10.19     3.77e-005   0.0186       9.39          
+B_lNo_fortyone          B_lNo_homeFT                -7.23e-006 -0.0113     -10.46    2.54e-005   0.0335       -9.71         
+B_lNo_eighteen          B_lNo_oneCar                9.12e-006  0.0428      -10.81    1.92e-005   0.0790       -10.28        
+B_lNo_manConst          B_lNo_twentysix             -7.68e-007 -0.00101    -10.91    3.47e-005   0.0390       -10.30        
+ASC_lNo                 B_lNo_homeFT                -2.00e-005 -0.0286     11.80     -1.85e-005  -0.0232      10.88         
+B_lNo_homeFT            B_lNo_manConst              -1.18e-005 -0.0107     12.33     -7.55e-006  -0.00578     11.33         
+B_lNo_oneCar            B_lNo_twoAdults             -2.56e-005 -0.118      -12.60    -1.37e-006  -0.00607     -13.17        
+B_lNo_homePT            B_lNo_oneCar                5.09e-006  0.00705     -13.99    1.03e-005   0.0122       -12.80        
+B_lNo_PT                B_lNo_eighteen              -4.83e-005 -0.135      14.03     -4.16e-005  -0.0985      13.13         
+B_lNo_homeFT            B_lNo_twoCars               6.95e-006  0.0145      -14.76    9.04e-006   0.0171       -13.56        
+B_lNo_PT                B_lNo_homePT                3.38e-005  0.0278      16.36     -8.88e-006  -0.00607     14.78         
+ASC_lNo                 B_lNo_retail                -7.92e-006 -0.0290     16.37     -1.42e-005  -0.0483      15.64         
+B_lNo_eighteen          B_lNo_homeFT                1.80e-005  0.0255      16.98     2.92e-005   0.0349       15.59         
+B_lNo_apart             B_lNo_twoPlusAdults         6.39e-005  0.304       -17.60    6.21e-005   0.294        -17.60        
+ASC_lNo                 B_lNo_oneCar                -7.08e-005 -0.336      -18.01    -0.000113   -0.484       -16.36        
+B_lNo_homePT            B_lNo_twoAdults             -3.23e-006 -0.00288    -18.15    -1.12e-006  -0.000929    -16.72        
+B_lNo_eighteen          B_lNo_twoAdults             -1.04e-005 -0.0315     -19.82    -5.85e-006  -0.0168      -19.46        
+ASC_lNo                 B_lNo_twentysix             -7.44e-006 -0.0154     21.04     -1.84e-005  -0.0339      19.50         
+B_lNo_twoAdultsChildren B_lNo_twoPlusAdultsChildren 0.000279   0.719       -21.66    0.000266    0.739        -23.39        
+ASC_lNo                 B_lNo_twoAdults             -0.000230  -0.702      -21.88    -0.000223   -0.672       -21.91        
+B_lNo_PT                B_lNo_twoCars               1.38e-006  0.00567     22.48     3.94e-006   0.0148       21.04         
+ASC_lNo                 B_lNo_PT                    -9.24e-006 -0.0260     -22.67    -1.44e-005  -0.0356      -21.07        
+B_lNo_manConst          B_lNo_retail                3.09e-005  0.0720      -23.34    1.62e-005   0.0338       -21.46        
+B_lNo_homeFT            B_lNo_oneCar                4.73e-006  0.0102      -23.34    3.46e-006   0.00638      -21.31        
+B_lNo_oneAdultChildren  B_lNo_twoPlusAdults         0.000249   0.283       24.93     0.000235    0.292        26.87         
+B_lNo_oneAdultChildren  B_lNo_sixteen               -2.54e-006 -0.00206    24.94     -4.78e-006  -0.00390     25.89         
+B_lNo_eighteen          B_lNo_retail                -8.06e-006 -0.0292     25.12     6.33e-006   0.0206       24.34         
+B_lNo_retail            B_lNo_twoCars               9.29e-006  0.0497      -25.15    1.15e-005   0.0592       -24.71        
+B_lNo_fortyone          B_lNo_retail                -6.18e-006 -0.0248     -25.25    2.82e-005   0.101        -25.46        
+B_lNo_PT                B_lNo_homeFT                3.59e-005  0.0459      26.09     -8.51e-006  -0.00903     23.26         
+B_lNo_twentysix         B_lNo_twoCars               2.17e-005  0.0657      -26.83    2.97e-005   0.0827       -25.18        
+B_lNo_twoAdults         B_lNo_twoCars               -3.43e-005 -0.153      27.19     -3.27e-005  -0.149       27.62         
+B_lNo_homeFT            B_lNo_twoAdults             -1.23e-006 -0.00171    -28.68    -6.18e-008  -7.99e-005   -26.65        
+B_lNo_eighteen          B_lNo_twentysix             3.86e-005  0.0789      28.71     3.71e-005   0.0653       26.38         
+B_lNo_sixteen           B_lNo_twoAdults             -1.06e-006 -0.00224    28.82     2.55e-006   0.00515      27.81         
+B_lNo_PT                B_lNo_sixteen               -4.66e-005 -0.0907     -30.30    -5.91e-005  -0.0979      -27.96        
+B_lNo_apart             B_lNo_oneAdultChildren      4.00e-005  0.0732      -30.51    4.82e-005   0.0932       -32.89        
+B_lNo_homePT            B_lNo_sixteen               1.22e-005  0.00771     -31.34    2.43e-005   0.0132       -28.77        
+B_lNo_apart             B_lNo_homePT                1.48e-006  0.00212     31.46     5.50e-006   0.00706      28.81         
+B_lNo_sixteen           B_lNo_twoAdultsChildren     1.86e-006  0.00370     -32.23    -8.58e-007  -0.00166     -31.22        
+B_lNo_oneCar            B_lNo_twoCars               8.73e-005  0.606       32.88     0.000101    0.659        34.23         
+ASC_lNo                 B_lNo_manConst              -8.34e-006 -0.0167     33.24     -1.20e-005  -0.0214      31.08         
+B_lNo_PT                B_lNo_retail                -9.97e-005 -0.327      34.84     -6.93e-005  -0.200       34.09         
+B_lNo_homePT            B_lNo_twoPlusAdults         6.53e-008  5.81e-005   -35.73    -1.26e-005  -0.0103      -32.79        
+B_lNo_PT                B_lNo_twentysix             -1.04e-005 -0.0193     38.33     -7.64e-006  -0.0119      35.33         
+B_lNo_oneCar            B_lNo_twentysix             1.66e-005  0.0518      38.90     3.09e-005   0.0836       36.42         
+B_lNo_PT                B_lNo_apart                 -2.00e-006 -0.00878    -39.57    -2.23e-006  -0.00879     -36.72        
+ASC_lNo                 B_lNo_fortyone              -3.44e-006 -0.0118     39.58     5.13e-006   0.0158       37.97         
+B_lNo_apart             B_lNo_twoAdults             3.53e-005  0.168       39.93     3.31e-005   0.159        40.23         
+B_lNo_manConst          B_lNo_twoCars               1.44e-005  0.0421      -39.95    1.61e-005   0.0434       -37.43        
+B_lNo_eighteen          B_lNo_manConst              7.36e-006  0.0146      40.01     2.49e-005   0.0424       37.63         
+B_lNo_sixteen           B_lNo_twoPlusAdultsChildren -1.66e-005 -0.0324     -41.12    -8.93e-006  -0.0168      -40.12        
+B_lNo_oneCar            B_lNo_sixteen               -1.16e-005 -0.0381     -41.79    -2.28e-005  -0.0658      -38.71        
+B_lNo_twentysix         B_lNo_twoAdults             -1.44e-005 -0.0290     -42.74    -6.24e-006  -0.0118      -40.96        
+B_lNo_oneCar            B_lNo_retail                7.73e-006  0.0427      43.89     1.51e-005   0.0758       42.69         
+B_lNo_homePT            B_lNo_oneAdultChildren      -2.30e-006 -0.000786   -44.18    1.02e-005   0.00342      -42.77        
+B_lNo_PT                B_lNo_twoPlusAdults         -1.43e-007 -0.000390   -45.64    2.95e-007   0.000743     -43.57        
+B_lNo_PT                B_lNo_oneAdultChildren      1.05e-006  0.00111     -46.11    5.92e-006   0.00611      -48.35        
+B_lNo_homeFT            B_lNo_sixteen               2.03e-005  0.0200      -46.33    3.26e-005   0.0273       -42.69        
+B_lNo_retail            B_lNo_twoAdults             -5.38e-006 -0.0191     -46.44    2.26e-006   0.00793      -46.98        
+B_lNo_eighteen          B_lNo_sixteen               5.91e-005  0.127       -48.45    6.41e-005   0.120        -45.07        
+B_lNo_homePT            B_lNo_twoAdultsChildren     3.62e-006  0.00304     -48.59    -8.34e-006  -0.00668     -44.75        
+B_lNo_oneAdultChildren  B_lNo_twoAdults             0.000238   0.271       49.01     0.000217    0.273        52.67         
+B_lNo_PT                B_lNo_manConst              -1.78e-005 -0.0319     49.45     2.30e-005   0.0348       47.04         
+B_lNo_apart             B_lNo_homeFT                3.05e-006  0.00679     49.93     2.56e-006   0.00510      45.74         
+B_lNo_eighteen          B_lNo_fortyone              3.37e-005  0.115       51.34     2.85e-005   0.0838       46.91         
+B_lNo_oneAdultChildren  B_lNo_oneCar                -2.67e-005 -0.0474     51.43     -1.96e-006  -0.00351     55.43         
+B_lNo_manConst          B_lNo_oneCar                1.04e-005  0.0314      -51.63    1.81e-005   0.0475       -48.23        
+B_lNo_fortyone          B_lNo_twoCars               4.36e-006  0.0219      -52.24    -8.23e-006  -0.0383      -48.26        
+ASC_lNo                 B_lNo_sixteen               5.72e-006  0.0124      -52.71    1.60e-005   0.0312       -50.18        
+B_lNo_homePT            B_lNo_twoPlusAdultsChildren 3.83e-006  0.00315     -53.49    -4.88e-006  -0.00378     -49.27        
+B_lNo_sixteen           B_lNo_twoCars               -1.42e-005 -0.0451     53.50     -2.28e-005  -0.0674      50.21         
+ASC_lNo                 B_lNo_twoPlusAdults         -0.000258  -0.786      -54.09    -0.000263   -0.783       -53.47        
+ASC_lNo                 B_lNo_oneAdultChildren      -0.000231  -0.271      -54.20    -0.000232   -0.282       -56.93        
+B_lNo_eighteen          B_lNo_oneAdultChildren      -1.47e-005 -0.0171     -54.28    -1.45e-005  -0.0169      -57.22        
+B_lNo_homeFT            B_lNo_twoPlusAdults         -5.41e-006 -0.00749    -54.35    -2.83e-005  -0.0362      -49.91        
+B_lNo_manConst          B_lNo_twoAdults             -8.70e-006 -0.0169     -54.56    -8.05e-007  -0.00148     -52.35        
+B_lNo_homeFT            B_lNo_oneAdultChildren      -4.60e-006 -0.00245    -56.73    -1.47e-005  -0.00766     -56.58        
+B_lNo_apart             B_lNo_twoAdultsChildren     5.59e-005  0.250       -57.98    5.76e-005   0.265        -60.42        
+B_lNo_eighteen          B_lNo_twoPlusAdults         -6.37e-005 -0.192      -58.29    -7.28e-005  -0.207       -56.21        
+B_lNo_oneAdultChildren  B_lNo_twoCars               -1.76e-005 -0.0301     58.58     1.10e-006   0.00202      63.24         
+B_lNo_apart             B_lNo_eighteen              -7.38e-006 -0.0358     60.56     -7.90e-006  -0.0351      57.29         
+B_lNo_PT                B_lNo_fortyone              -6.72e-006 -0.0207     60.62     -8.93e-006  -0.0232      55.56         
+ASC_lNo                 B_lNo_apart                 -8.61e-005 -0.422      -61.23    -8.45e-005  -0.392       -59.99        
+B_lNo_twoAdultsChildren B_lNo_twoPlusAdults         0.000271   0.756       62.84     0.000254    0.750        64.01         
+B_lNo_sixteen           B_lNo_twentysix             3.28e-005  0.0469      63.80     3.04e-005   0.0375       58.93         
+B_lNo_oneCar            B_lNo_twoPlusAdults         -5.28e-006 -0.0243     -63.85    3.09e-005   0.135        -68.34        
+B_lNo_apart             B_lNo_oneCar                -5.14e-006 -0.0381     64.80     -9.29e-006  -0.0636      61.45         
+B_lNo_oneAdultChildren  B_lNo_twentysix             -4.83e-005 -0.0373     66.07     -5.29e-005  -0.0406      68.02         
+B_lNo_oneAdultChildren  B_lNo_retail                -1.33e-005 -0.0182     67.21     -2.36e-005  -0.0335      71.18         
+B_lNo_retail            B_lNo_sixteen               -5.78e-007 -0.00146    -67.73    -8.54e-007  -0.00195     -63.83        
+B_lNo_fortyone          B_lNo_twoAdults             -2.38e-006 -0.00796    -68.68    6.13e-006   0.0194       -68.01        
+B_lNo_fortyone          B_lNo_oneCar                7.02e-008  0.000365    -69.72    -1.66e-006  -0.00751     -64.68        
+B_lNo_homeFT            B_lNo_twoAdultsChildren     -4.98e-006 -0.00649    -72.72    -2.87e-005  -0.0356      -67.23        
+B_lNo_manConst          B_lNo_sixteen               2.19e-005  0.0302      -73.43    2.57e-005   0.0307       -68.34        
+B_lNo_apart             B_lNo_twoPlusAdultsChildren 6.33e-005  0.278       -73.90    6.23e-005   0.278        -75.69        
+B_lNo_manConst          B_lNo_oneAdultChildren      -7.12e-006 -0.00531    -74.06    -2.37e-005  -0.0177      -75.94        
+B_lNo_apart             B_lNo_twentysix             -1.09e-005 -0.0352     74.30     -1.01e-005  -0.0296      69.33         
+B_lNo_PT                B_lNo_twoAdultsChildren     5.01e-006  0.0129      -74.78    5.50e-006   0.0135       -72.60        
+B_lNo_twentysix         B_lNo_twoPlusAdults         -3.90e-005 -0.0783     -74.83    -4.12e-005  -0.0771      -71.08        
+B_lNo_twoCars           B_lNo_twoPlusAdults         -2.71e-005 -0.121      -75.71    1.12e-006   0.00506      -80.62        
+B_lNo_fortyone          B_lNo_oneAdultChildren      -2.76e-005 -0.0355     -77.64    -4.93e-005  -0.0631      -81.25        
+ASC_lNo                 B_lNo_twoAdultsChildren     -0.000240  -0.689      -78.23    -0.000235   -0.680       -78.84        
+B_lNo_homeFT            B_lNo_twoPlusAdultsChildren -4.07e-006 -0.00519    -79.70    -4.94e-006  -0.00594     -74.36        
+B_lNo_twoAdults         B_lNo_twoPlusAdults         0.000249   0.739       -84.41    0.000231    0.709        -81.36        
+B_lNo_PT                B_lNo_twoPlusAdultsChildren 2.68e-006  0.00674     -85.20    -5.78e-007  -0.00137     -82.05        
+ASC_lNo                 B_lNo_twoPlusAdultsChildren -0.000250  -0.704      -86.22    -0.000246   -0.691       -86.53        
+B_lNo_manConst          B_lNo_twoPlusAdults         -2.81e-005 -0.0544     -86.24    -3.69e-005  -0.0670      -81.59        
+B_lNo_apart             B_lNo_manConst              -6.61e-006 -0.0206     86.47     -2.86e-006  -0.00812     81.15         
+B_lNo_twoPlusAdults     B_lNo_twoPlusAdultsChildren 0.000278   0.760       -86.51    0.000263    0.750        -87.09        
+B_lNo_fortyone          B_lNo_sixteen               3.19e-005  0.0758      -88.44    3.18e-005   0.0655       -82.07        
+B_lNo_retail            B_lNo_twoPlusAdults         -1.90e-005 -0.0676     -90.71    -2.37e-005  -0.0824      -89.40        
+B_lNo_eighteen          B_lNo_twoAdultsChildren     -1.42e-005 -0.0402     -91.27    -1.85e-005  -0.0514      -89.73        
+B_lNo_oneCar            B_lNo_twoAdultsChildren     -2.97e-005 -0.129      -93.23    -3.46e-006  -0.0148      -99.13        
+B_lNo_apart             B_lNo_twoCars               2.13e-005  0.153       93.27     2.07e-005   0.146        92.00         
+B_lNo_twentysix         B_lNo_twoAdultsChildren     -3.90e-005 -0.0737     -97.63    -5.38e-005  -0.0981      -92.87        
+B_lNo_apart             B_lNo_retail                -5.93e-006 -0.0339     98.65     -3.09e-006  -0.0167      96.67         
+B_lNo_eighteen          B_lNo_twoPlusAdultsChildren -2.82e-005 -0.0784     -100.13   -2.96e-005  -0.0795      -98.45        
+B_lNo_twoAdultsChildren B_lNo_twoCars               -5.78e-005 -0.243      102.16    -3.70e-005  -0.162       108.55        
+B_lNo_twentysix         B_lNo_twoPlusAdultsChildren -3.29e-005 -0.0609     -106.72   -3.69e-005  -0.0651      -102.09       
+B_lNo_oneCar            B_lNo_twoPlusAdultsChildren -1.76e-005 -0.0747     -107.30   5.74e-006   0.0237       -112.73       
+B_lNo_manConst          B_lNo_twoAdultsChildren     -2.63e-005 -0.0480     -108.71   -4.66e-005  -0.0825      -103.09       
+B_lNo_fortyone          B_lNo_twoPlusAdults         -2.70e-005 -0.0901     -109.72   -3.50e-005  -0.110       -105.66       
+B_lNo_twoCars           B_lNo_twoPlusAdultsChildren -4.53e-005 -0.186      -115.58   -2.78e-005  -0.118       -121.43       
+B_lNo_manConst          B_lNo_twoPlusAdultsChildren -3.47e-005 -0.0621     -116.32   -5.49e-005  -0.0941      -110.17       
+B_lNo_retail            B_lNo_twoAdultsChildren     -1.72e-005 -0.0575     -120.65   -2.89e-005  -0.0978      -119.98       
+B_lNo_apart             B_lNo_fortyone              -9.26e-006 -0.0497     122.17    -2.45e-006  -0.0120      117.36        
+B_lNo_retail            B_lNo_twoPlusAdultsChildren -2.17e-005 -0.0710     -130.72   -2.93e-005  -0.0960      -130.10       
+B_lNo_twoAdults         B_lNo_twoAdultsChildren     0.000254   0.709       -135.02   0.000238    0.710        -140.19       
+B_lNo_fortyone          B_lNo_twoAdultsChildren     -2.23e-005 -0.0702     -138.76   -4.22e-005  -0.129       -133.94       
+B_lNo_fortyone          B_lNo_twoPlusAdultsChildren -3.92e-005 -0.121      -145.77   -6.21e-005  -0.183       -139.86       
+B_lNo_twoAdults         B_lNo_twoPlusAdultsChildren 0.000253   0.692       -150.84   0.000238    0.688        -154.14       
+
+Smallest singular value of the hessian: 199.976
+
