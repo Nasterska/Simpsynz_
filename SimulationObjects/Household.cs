@@ -54,7 +54,7 @@ namespace SimulationObjects
         {
             myDwellType = dwellTyp;
         }
-        
+
         private NumOfCars myNumOfCars; // done
         public NumOfCars GetNumOfCars()
         {
@@ -146,6 +146,22 @@ namespace SimulationObjects
             Type = AgentType.Household;
         }
 
+        private Household(Household copyFrom)
+        {
+            myHhhldSize = copyFrom.myHhhldSize;
+            numberOfAdults = copyFrom.numberOfAdults;
+            myDwellType = copyFrom.myDwellType;
+            myNumOfCars = copyFrom.myNumOfCars;
+            myNumOfWorkers = copyFrom.myNumOfWorkers;
+            myNumOfPeople = copyFrom.myNumOfPeople;
+            myNumOfKids = copyFrom.myNumOfKids;
+            myNumofUnivDeg = copyFrom.myNumofUnivDeg;
+            myIncomeLevel = copyFrom.myIncomeLevel;
+            myIncome = copyFrom.myIncome;
+            Type = copyFrom.Type;
+            myZoneID = copyFrom.myZoneID;
+        }
+
         public Household(HouseholdSize size, string currZone)
         {
             switch (size)
@@ -165,7 +181,7 @@ namespace SimulationObjects
                 default:
                     break;
             }
-  
+
             myZoneID = currZone;
             myDwellType = DwellingType.House;
             myNumOfCars = NumOfCars.OneCar;
@@ -218,7 +234,7 @@ namespace SimulationObjects
             else if (baseDim == "DwellingType")
             {
                 jointKey = ((int)myHhhldSize).ToString()
-                            + Constants.CONDITIONAL_DELIMITER 
+                            + Constants.CONDITIONAL_DELIMITER
                             + ((int)myNumOfWorkers).ToString()
                             + Constants.CONDITIONAL_DELIMITER
                             + ((int)myNumOfKids).ToString()
@@ -231,8 +247,8 @@ namespace SimulationObjects
             }
             else if (baseDim == "NumOfCars")
             {
-                jointKey =  ((int)myHhhldSize).ToString()
-                            + Constants.CONDITIONAL_DELIMITER 
+                jointKey = ((int)myHhhldSize).ToString()
+                            + Constants.CONDITIONAL_DELIMITER
                             + ((int)myNumOfWorkers).ToString()
                             + Constants.CONDITIONAL_DELIMITER
                             + ((int)myNumOfKids).ToString()
@@ -260,7 +276,7 @@ namespace SimulationObjects
             else if (baseDim == "NumOfKids")
             {
                 jointKey = ((int)myHhhldSize).ToString()
-                            + Constants.CONDITIONAL_DELIMITER 
+                            + Constants.CONDITIONAL_DELIMITER
                             + ((int)myNumOfWorkers).ToString()
                             + Constants.CONDITIONAL_DELIMITER
                             + ((int)myIncomeLevel).ToString()
@@ -307,18 +323,15 @@ namespace SimulationObjects
             return jointKey;
         }
 
-        public override SimulationObject CreateNewCopy(string baseDim, 
+        public override SimulationObject CreateNewCopy(string baseDim,
             int baseDimVal, int personId)
         {
-            MemoryStream m = new MemoryStream();
-            BinaryFormatter b = new BinaryFormatter();
-            b.Serialize(m, this);
-            m.Position = 0;
-            Household myCopy = (Household) b.Deserialize(m);
-            
+
+            Household myCopy = new Household(this);
+
             if (baseDim == "HouseholdSize")
             {
-                myCopy.myHhhldSize = (HouseholdSize) baseDimVal;
+                myCopy.myHhhldSize = (HouseholdSize)baseDimVal;
             }
             else if (baseDim == "DwellingType")
             {
@@ -326,7 +339,7 @@ namespace SimulationObjects
             }
             else if (baseDim == "NumOfCars")
             {
-                myCopy.myNumOfCars = (NumOfCars) baseDimVal;
+                myCopy.myNumOfCars = (NumOfCars)baseDimVal;
             }
             else if (baseDim == "NumOfWorkers")
             {
@@ -354,11 +367,8 @@ namespace SimulationObjects
 
         public Household CreateNewCopy(uint income)
         {
-            MemoryStream m = new MemoryStream();
-            BinaryFormatter b = new BinaryFormatter();
-            b.Serialize(m, this);
-            m.Position = 0;
-            Household myCopy = (Household)b.Deserialize(m);
+
+            Household myCopy = new Household(this);
 
             myCopy.myIncome = income;
             myCopy.myIncomeLevel = IncomeConvertor.ConvertValueToLevel(income);
@@ -368,12 +378,7 @@ namespace SimulationObjects
 
         public Household CreateNewCopy()
         {
-            MemoryStream m = new MemoryStream();
-            BinaryFormatter b = new BinaryFormatter();
-            b.Serialize(m, this);
-            m.Position = 0;
-            Household myCopy = (Household)b.Deserialize(m);
-            return myCopy;
+            return new Household(this);
         }
 
         private bool CheckLogicalInconsistencies(Household currHhld)
@@ -382,7 +387,7 @@ namespace SimulationObjects
             int totWrk = (int)currHhld.GetNumOfWorkers();
             int totUnv = (int)currHhld.GetNumOfUnivDegree();
             int totKid = (int)currHhld.GetNumOfKids();
-           
+
             if (totPer == 0)
             {
                 totPer = 1;
@@ -391,7 +396,7 @@ namespace SimulationObjects
             if (totUnv > totPer)
             {
                 currHhld.SetNumOfUnivDegree((NumWithUnivDeg)totPer);
-                currHhld.SetNumOfWorkers((NumOfWorkers) totPer);
+                currHhld.SetNumOfWorkers((NumOfWorkers)totPer);
                 currHhld.SetNumOfKids(NumOfKids.None);
                 return true;
             }
@@ -413,8 +418,8 @@ namespace SimulationObjects
             // number of univ degrees
             if (totKid > 0)
             {
-                if ((totWrk < totUnv) 
-                    && (totPer < (totWrk - totUnv)+totKid+totWrk))
+                if ((totWrk < totUnv)
+                    && (totPer < (totWrk - totUnv) + totKid + totWrk))
                 {
                     currHhld.SetNumOfUnivDegree((NumWithUnivDeg)(totWrk));
                 }
@@ -426,11 +431,12 @@ namespace SimulationObjects
                 currHhld.SetNumOfKids(NumOfKids.None);
             }
 
-            if ((totPer - totWrk == 0 && totKid > 0 )
+            if ((totPer - totWrk == 0 && totKid > 0)
                || (totPer - totUnv == 0 && totKid > 0))
             {
                 currHhld.SetNumOfKids(NumOfKids.None);
-            } else if (totKid > totPer - totWrk)
+            }
+            else if (totKid > totPer - totWrk)
             {
                 currHhld.SetNumOfKids(NumOfKids.None);
             }
@@ -508,7 +514,7 @@ namespace SimulationObjects
         }
         public static uint GetEuroIncome(uint currHhhldInc)
         {
-            return (uint) Math.Round(currHhhldInc / Constants.BFRANC_TO_EURO,0);
+            return (uint)Math.Round(currHhhldInc / Constants.BFRANC_TO_EURO, 0);
         }
 
         public static int GetEuroIncome(IncomeLevel currHhldIncLvl)

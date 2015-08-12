@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{1628D102-92CA-487E-B430-84EE0F04C890}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>PopulationSynthesis</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\README.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\objects\pack\pack-7926c4f8e7cabdd3e06156a5932e3d80df63bee7.idx" />
+    <None Include=".git\objects\pack\pack-7926c4f8e7cabdd3e06156a5932e3d80df63bee7.pack" />
+    <None Include=".git\refs\heads\master" />
+    <None Include=".git\refs\remotes\origin\master" />
+    <None Include="models_input\csv%28Input%29\AgeCounts.csv" />
+    <None Include="models_input\csv%28Input%29\ChildrenCounts.csv" />
+    <None Include="models_input\csv%28Input%29\data-verbose.csv" />
+    <None Include="models_input\csv%28Input%29\Household Z-Stats.csv" />
+    <None Include="models_input\csv%28Input%29\liste_des_mandats.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Age 2 Adult 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Age 2 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Age 3 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Age 3 Adults 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Driver License 2 Adult 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Driver License 2 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Driver License 3 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Driver License 3 Adults 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Employment Status 2 Adult 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Employment Status 2 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Employment Status 3 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Employment Status 3 Adults 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Occupation Type 2 Adult 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Occupation Type 2 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Occupation Type 3 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Occupation Type 3 Adults 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Sex 2 Adult 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Sex 2 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Sex 3 Adult 1Plus Children.csv" />
+    <None Include="models_input\csv%28Input%29\Marginal - Sex 3 Adults 0 Children.csv" />
+    <None Include="models_input\csv%28Input%29\PeopleCounts.csv" />
+    <None Include="models_input\csv%28Input%29\Person Z-Stats.csv" />
+    <None Include="models_input\csv%28Input%29\ThreePlusVehicleCounts.csv" />
+    <None Include="models_input\rep_household%28Models%29\DwellingType - Final.rep" />
+    <None Include="models_input\rep_household%28Models%29\HouseholdType - Final.rep" />
+    <None Include="models_input\rep_household%28Models%29\NumberOfChildren - Final.rep" />
+    <None Include="models_input\rep_household%28Models%29\NumberOfPeople - Final.rep" />
+    <None Include="models_input\rep_household%28Models%29\NumberOfVehicles - Final.rep" />
+    <None Include="models_input\rep_household%28Models%29\pd - Final.rep" />
+    <None Include="models_input\rep_person%28Models%29\Age.rep" />
+    <None Include="models_input\rep_person%28Models%29\DriverLicense.rep" />
+    <None Include="models_input\rep_person%28Models%29\Final - EmploymentStatus.rep" />
+    <None Include="models_input\rep_person%28Models%29\Occupation.rep" />
+    <None Include="models_input\rep_person%28Models%29\Sex.rep" />
+    <None Include="PopulationSynthesis\InputData\HouseholdComposite\SyntheticHhldComposite.csv" />
+    <None Include="Release%28.exe%29\ConsoleApplication2.csprojResolveAssemblyReference.cache" />
+    <None Include="Release%28.exe%29\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".git\ms-persist.xml" />
+    <Content Include="PopulationSynthesis\InputData\PD_hhldType.txt" />
+    <Content Include="Release%28.exe%29\ConsoleApplication2.csproj.FileListAbsolute.txt" />
+    <Content Include="Release%28.exe%29\ConsoleApplication2.pdb" />
+    <Content Include="Release%28.exe%29\simpsynz.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Release%28.exe%29\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Release%28.exe%29\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Release%28.exe%29\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Samplers\GibbsSampler.cs" />
+    <Compile Include="Samplers\ImportanceSampler.cs" />
+    <Compile Include="Samplers\MetropolisHasting.cs" />
+    <Compile Include="Samplers\Sampler.cs" />
+    <Compile Include="SimPSynz\SimPSynz.cs" />
+    <Compile Include="SimulationObjects\AgentAttributes.cs" />
+    <Compile Include="SimulationObjects\Household.cs" />
+    <Compile Include="SimulationObjects\HouseholdPersonComposite.cs" />
+    <Compile Include="SimulationObjects\Person.cs" />
+    <Compile Include="SimulationObjects\SimulationObject.cs" />
+    <Compile Include="SimulationObjects\SpatialZone.cs" />
+    <Compile Include="SimulationObjects\World.cs" />
+    <Compile Include="Utils\ConditionalDataReader.cs" />
+    <Compile Include="Utils\ConditionalDistribution.cs" />
+    <Compile Include="Utils\ConditionalGenerator.cs" />
+    <Compile Include="Utils\DiscreteCondDistribution.cs" />
+    <Compile Include="Utils\DiscreteMarginalDistribution.cs" />
+    <Compile Include="Utils\InputDataReader.cs" />
+    <Compile Include="Utils\MarginalDistribution.cs" />
+    <Compile Include="Utils\ModelDistribution.cs" />
+    <Compile Include="Utils\OutputFileWriter.cs" />
+    <Compile Include="Utils\RandomNumberGen.cs" />
+    <Compile Include="Utils\utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

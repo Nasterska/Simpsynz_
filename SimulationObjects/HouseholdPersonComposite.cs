@@ -393,13 +393,11 @@ namespace SimulationObjects
         public override SimulationObject CreateNewCopy(string baseDim,
            int baseDimVal, int personId)
         {
-            MemoryStream m = new MemoryStream();
-            BinaryFormatter b = new BinaryFormatter();
-            b.Serialize(m, this);
-            m.Position = 0;
-            HouseholdPersonComposite myCopy = (HouseholdPersonComposite)b.Deserialize(m);
+            
+            HouseholdPersonComposite myCopy = (HouseholdPersonComposite)this.MemberwiseClone(); //TODO: changed copy method -MN
             myCopy.persons = persons.ConvertAll(person => (Person)person.CreateNewCopy());
             myCopy.household = household.CreateNewCopy();
+
 
             if (baseDim == "HouseholdSize")
             {

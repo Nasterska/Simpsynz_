@@ -347,9 +347,11 @@ namespace Samplers
                     if (randVal <= ((KeyValPair)curCom[i]).Value)
                     {
                         SimulationObject copy = prvAgnt.CreateNewCopy(genDim, i, personId);
+
                         return copy;
                     }
                 }
+                throw new Exception();
 
             }
             else
