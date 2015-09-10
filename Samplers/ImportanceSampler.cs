@@ -27,7 +27,7 @@ namespace Samplers
 
         public SimulationObject GetNextAgent(DiscreteMarginalDistribution f_x,
             ConditionalDistribution g_x, string dimension,
-            SimulationObject prvAgent, SpatialZone currZone)
+            SimulationObject prvAgent, SpatialZone currZone, int agentID)
         {
             switch(prvAgent.GetAgentType())
             {
@@ -37,6 +37,9 @@ namespace Samplers
                 case AgentType.Person:
                     return GetNextAgentPerson(
                     f_x, g_x, dimension, (Person)prvAgent, currZone);
+				case AgentType.HouseholdPersonComposite:
+				return GetNextAgentCompositeHhld(
+					f_x, g_x, dimension, (HouseholdPersonComposite)prvAgent, currZone, agentID);
                 default:
                     return null;
             }
@@ -51,7 +54,7 @@ namespace Samplers
             double currRatio = 0.00;
             int cnt = 0;
             do{
-                currDimVal = GenerateNextFromG_X(g_x, prvAgent,currZone);
+                currDimVal = GenerateNextFromG_X(g_x, prvAgent,currZone,0);
                 currProb = f_x.GetValue(currDimVal.Category);
                 currRatio = currProb / currDimVal.Value;
                 if (currRatio > 1.00)
@@ -79,7 +82,7 @@ namespace Samplers
             int cnt = 0;
             do
             {
-                currDimVal = GenerateNextFromG_X(g_x, prvAgent, currZone);
+                currDimVal = GenerateNextFromG_X(g_x, prvAgent, currZone,0);
                 currProb = f_x.GetValue(currDimVal.Category);
                 currRatio = currProb / currDimVal.Value;
                 if (currRatio > 1.00)
@@ -98,12 +101,40 @@ namespace Samplers
                 g_x.GetDimensionName(), Int16.Parse(currDimVal.Category),0);
         }
 
+		public HouseholdPersonComposite GetNextAgentCompositeHhld(DiscreteMarginalDistribution f_x,
+			ConditionalDistribution g_x, string dimension,
+			HouseholdPersonComposite prvAgent, SpatialZone currZone, int agentID)
+		{
+			KeyValPair currDimVal;
+			double currProb = 0.00;
+			double currRatio = 0.00;
+			int cnt = 0;
+			do
+			{
+				currDimVal = GenerateNextFromG_X(g_x, prvAgent, currZone, agentID);
+				currProb = f_x.GetValue(currDimVal.Category);
+				currRatio = currProb / currDimVal.Value;
+				if (currRatio > 1.00)
+				{
+					currRatio = 1.00;
+				}
+				if (cnt > 10000)
+				{
+					currRatio = 1;
+				}
+				cnt++;
+			} while (myRand.NextDouble() > currRatio);
+
+			// Create the household object based on the currDimVal.category
+			return (HouseholdPersonComposite)prvAgent.CreateNewCopy(
+				g_x.GetDimensionName(), Int16.Parse(currDimVal.Category),agentID);
+		}
+
         private KeyValPair GenerateNextFromG_X(ConditionalDistribution curG_X, 
-                                SimulationObject prvAgent, SpatialZone currZone)
+			SimulationObject prvAgent, SpatialZone currZone, int agentID)
         {
-            List <KeyValPair> curCom = curG_X.GetCommulativeValue(
-                prvAgent.GetNewJointKey(curG_X.GetDimensionName())
-                    , currZone);
+			List <KeyValPair> curCom = curG_X.GetCommulativeValue( prvAgent,
+												 currZone, agentID);
 
             double randVal = myRand.NextDoubleInRange(0, (double)
                 ((KeyValPair)curCom[curCom.Count - 1]).Value);
