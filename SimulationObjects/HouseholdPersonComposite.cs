@@ -374,9 +374,9 @@ namespace SimulationObjects
 			}else if (persons.Count () == 1) {
 				r = myrand.NextDouble ();
 				if (r < 0.49) {
-					persons [1].SetSex(Sex.Male);
+					persons [0].SetSex(Sex.Male);
 				} else {
-					persons [1].SetSex(Sex.Female);
+					persons [0].SetSex(Sex.Female);
 				}
 			}
 		}
