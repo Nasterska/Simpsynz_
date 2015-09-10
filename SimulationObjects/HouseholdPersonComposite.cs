@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using PopulationSynthesis.Utils;
 
 
 namespace SimulationObjects
@@ -348,6 +349,43 @@ namespace SimulationObjects
             }
         }
 
+		public void CheckConsistency()
+		{
+			CheckSexConsisteny ();
+			CheckAgeConsistency ();
+		}
+
+		void CheckSexConsisteny()
+		{
+			Random myrand = new Random ();
+			double r = 0.0;
+			//Sex
+			if (persons.Count () > 1) {
+				if (persons [1].GetSex () == persons [2].GetSex ()) {
+					r = myrand.NextDouble ();
+					if (r < 0.5) {
+						persons [1].SetSex(Sex.Male);
+						persons [2].SetSex(Sex.Female);
+					} else {
+						persons [1].SetSex(Sex.Female);
+						persons [2].SetSex(Sex.Male);
+					}
+				}
+			}else if (persons.Count () == 1) {
+				r = myrand.NextDouble ();
+				if (r < 0.49) {
+					persons [1].SetSex(Sex.Male);
+				} else {
+					persons [1].SetSex(Sex.Female);
+				}
+			}
+		}
+
+		void CheckAgeConsistency()
+		{
+			
+		}
+
        /* public HouseholdPersonComposite(HouseholdPersonComposite HhPersonMediator)
         {
             SetAgentType(AgentType.HouseholdPersonMediator);
@@ -391,97 +429,68 @@ namespace SimulationObjects
             return myCopy;
         }
         public override SimulationObject CreateNewCopy(string baseDim,
-           int baseDimVal, int personId)
+			int baseDimVal, int agentIndex/*from -1 to person (count-1). if -1 then it is a hhld object else person*/)
         {
             
             HouseholdPersonComposite myCopy = (HouseholdPersonComposite)this.MemberwiseClone(); //TODO: changed copy method -MN
             myCopy.persons = persons.ConvertAll(person => (Person)person.CreateNewCopy());
             myCopy.household = household.CreateNewCopy();
+			//change hhld
+			if (agentIndex == -1) {
+				if (baseDim == "DwellingType")
+				{
+					myCopy.household.SetDwellingType((DwellingType)baseDimVal);
+				}
+				else if (baseDim == "NumOfCars")
+				{
+					myCopy.household.SetNumOfCars((NumOfCars)baseDimVal);
+				}
+				else if (baseDim == "NumOfKids")
+				{
+					myCopy.household.SetNumOfKids((NumOfKids)baseDimVal);
+				}
+				else
+				{
+					return null;
+				}
+			}
+			//change person at index agentid
+			else {
+				if (baseDim == "Sex")
+				{
 
+					myCopy.getPersons().ElementAt(agentIndex).SetSex((Sex)baseDimVal);
+				}
+				else if (baseDim == "Occupation")
+				{
 
-            if (baseDim == "HouseholdSize")
-            {
-                myCopy.household.SetHhldSize((HouseholdSize)baseDimVal);
-            }
-            else if (baseDim == "DwellingType")
-            {
-                myCopy.household.SetDwellingType((DwellingType)baseDimVal);
-            }
-            else if (baseDim == "NumOfCars")
-            {
-                myCopy.household.SetNumOfCars((NumOfCars)baseDimVal);
-            }
-            else if (baseDim == "NumOfWorkers")
-            {
-                myCopy.household.SetNumOfWorkers((NumOfWorkers)baseDimVal);
-            }
-            else if (baseDim == "NumOfPeople")
-            {
-                /*if (baseDimVal > (int)household.GetNumOfPeople())
-                {
-                    int nmbrAdultsToAdd = baseDimVal - (int)household.GetNumOfPeople();
-                    for (int i = 0; i < nmbrAdultsToAdd; i++)
-                    {
-                        myCopy.addPerson(new Person());
-                    }
-                }
-                else if (baseDimVal < (int)household.GetNumOfPeople())
-                {
-                    int nmbrAdultsToAdd = (int)household.GetNumOfPeople() - baseDimVal;
-                    for (int i = 0; i < nmbrAdultsToAdd; i++)
-                    {
-                        Random rnd = new Random();
-                        myCopy.persons.RemoveAt(rnd.Next(0, persons.Count));
-                    }
-                }*/
-                myCopy.household.SetNumOfPeople((NumOfPeople)baseDimVal);
-            }
-            else if (baseDim == "NumOfKids")
-            {
-                myCopy.household.SetNumOfKids((NumOfKids)baseDimVal);
-            }
-            else if (baseDim == "NumWithUnivDeg")
-            {
-                myCopy.household.SetNumOfUnivDegree((NumWithUnivDeg)baseDimVal);
-            }
-            else if (baseDim == "IncomeLevel")
-            {
-                myCopy.household.SetIncomeLevel((IncomeLevel)baseDimVal);
-            }
-            else if (baseDim == "Sex")
-            {
-                
-                myCopy.getPersons().ElementAt(personId).SetSex((Sex)baseDimVal);
-            }
-            else if (baseDim == "Occupation")
-            {
+					myCopy.getPersons().ElementAt(agentIndex).SetOccupation((Occupation)baseDimVal);
+				}
+				else if (baseDim == "DrivingLicense")
+				{
 
-                myCopy.getPersons().ElementAt(personId).SetOccupation((Occupation)baseDimVal);
-            }
-            else if (baseDim == "DrivingLicense")
-            {
+					myCopy.getPersons().ElementAt(agentIndex).SetDrivingLicense((DrivingLicense)baseDimVal);
+				}
+				else if (baseDim == "Age")
+				{
 
-                myCopy.getPersons().ElementAt(personId).SetDrivingLicense((DrivingLicense)baseDimVal);
-            }
-            else if (baseDim == "Age")
-            {
+					myCopy.getPersons().ElementAt(agentIndex).SetAge((Age)baseDimVal);
+				}
+				else if (baseDim == "EmploymentStatus")
+				{
 
-                myCopy.getPersons().ElementAt(personId).SetAge((Age)baseDimVal);
-            }
-            else if (baseDim == "EmploymentStatus")
-            {
+					myCopy.getPersons().ElementAt(agentIndex).SetEmploymentStatus((EmploymentStatus)baseDimVal);
+				}
+				else if (baseDim == "EducationLevel")
+				{
 
-                myCopy.getPersons().ElementAt(personId).SetEmploymentStatus((EmploymentStatus)baseDimVal);
-            }
-            else if (baseDim == "EducationLevel")
-            {
-
-                myCopy.getPersons().ElementAt(personId).SetEducationLevel((EducationLevel)baseDimVal);
-            }
-            else
-            {
-                return null;
-            }
+					myCopy.getPersons().ElementAt(agentIndex).SetEducationLevel((EducationLevel)baseDimVal);
+				}
+				else
+				{
+					return null;
+				}
+			}
 
             return myCopy;
         }
