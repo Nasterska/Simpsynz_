@@ -973,11 +973,12 @@ namespace PopulationSynthesis.Utils
             HouseholdPersonComposite composite)
         {
             Household hhld = composite.getHousehold().CreateNewCopy();
-            String key = hhld.GetNewJointKey(GetDimensionName());
-            string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
+            //String key = hhld.GetNewJointKey(GetDimensionName());
+            //string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
             var currValues = new List<double>(6);
-            int myNumOfCars = int.Parse(curKeys[4]);
-            int dwellType =  int.Parse(curKeys[5]);
+			int myNumOfCars = (int) hhld.GetNumOfCars();
+			int dwellType = (int) hhld.GetDwellingType();
+			int hhldSize = (int) hhld.GetHhldSize();
 
             currValues.Add(1); // Math.Exp(0)
 
@@ -1198,11 +1199,12 @@ namespace PopulationSynthesis.Utils
            HouseholdPersonComposite composite)
         {
             Household hhld = composite.getHousehold().CreateNewCopy();
-            String key = hhld.GetNewJointKey(GetDimensionName());
-            string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
+            //String key = hhld.GetNewJointKey(GetDimensionName());
+            //string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
             var currValues = new List<double>(5);
-            int myNumOfCars = int.Parse(curKeys[4]);
-            int dwellType = int.Parse(curKeys[5]);
+			int myNumOfCars = (int) hhld.GetNumOfCars();
+			int dwellType = (int) hhld.GetDwellingType();
+			int hhldSize = (int) hhld.GetHhldSize();
 
             currValues.Add(1); // Math.Exp(0)
 
@@ -1367,11 +1369,13 @@ namespace PopulationSynthesis.Utils
       HouseholdPersonComposite composite)
         {
             Household hhld = composite.getHousehold().CreateNewCopy();
-            String key = hhld.GetNewJointKey(GetDimensionName());
-            string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
+            //String key = hhld.GetNewJointKey(GetDimensionName());
+            //string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
             var currValues = new List<double>(5);
-            int myNumOfCars = int.Parse(curKeys[4]);
-            int dwellType = int.Parse(curKeys[5]);
+			int myNumOfCars = (int) hhld.GetNumOfCars();
+			int dwellType = (int) hhld.GetDwellingType();
+			int hhldSize = (int) hhld.GetHhldSize();
+
 
             currValues.Add(1);
 
@@ -1495,12 +1499,12 @@ namespace PopulationSynthesis.Utils
       HouseholdPersonComposite composite,SpatialZone curZ)
         {
             Household hhld = composite.getHousehold().CreateNewCopy();
-            String key = hhld.GetNewJointKey(GetDimensionName());
-            string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
+            //String key = hhld.GetNewJointKey(GetDimensionName());
+            //string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
             var currValues = new List<double>(4);
-            int myNumOfCars = int.Parse(curKeys[4]);
-            int dwellType = int.Parse(curKeys[5]);
-            int hhldSize = int.Parse(curKeys[0]);
+			int myNumOfCars = (int) hhld.GetNumOfCars();
+			int dwellType = (int) hhld.GetDwellingType();
+			int hhldSize = (int) hhld.GetHhldSize();
 
             currValues.Add(1);
 
@@ -1687,12 +1691,12 @@ namespace PopulationSynthesis.Utils
      HouseholdPersonComposite composite, SpatialZone curZ)
         {
             Household hhld = composite.getHousehold().CreateNewCopy();
-            String key = hhld.GetNewJointKey(GetDimensionName());
-            string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
+            //String key = hhld.GetNewJointKey(GetDimensionName());
+            //string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
             var currValues = new List<double>(3);
-            int myNumOfCars = int.Parse(curKeys[4]);
-            int dwellType = int.Parse(curKeys[5]);
-            int hhldSize = int.Parse(curKeys[0]);
+			int myNumOfCars = (int) hhld.GetNumOfCars();
+			int dwellType = (int) hhld.GetDwellingType();
+			int hhldSize = (int) hhld.GetHhldSize();
 
             currValues.Add(1);
 
@@ -1886,12 +1890,12 @@ namespace PopulationSynthesis.Utils
                  HouseholdPersonComposite composite)
         {
             Household hhld = composite.getHousehold().CreateNewCopy();
-            String key = hhld.GetNewJointKey(GetDimensionName());
-            string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
+            //String key = hhld.GetNewJointKey(GetDimensionName());
+            //string[] curKeys = key.Split(Constants.CONDITIONAL_DELIMITER[0]);
             var currValues = new List<double>(6);
-            int myNumOfCars = int.Parse(curKeys[4]);
-            int dwellType = int.Parse(curKeys[5]);
-            int hhldSize = int.Parse(curKeys[0]);
+			int myNumOfCars = (int) hhld.GetNumOfCars();
+			int dwellType = (int) hhld.GetDwellingType();
+			int hhldSize = (int) hhld.GetHhldSize();
 
             currValues.Add(1);
 
