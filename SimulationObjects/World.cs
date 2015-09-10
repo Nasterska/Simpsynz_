@@ -1695,45 +1695,56 @@ namespace SimulationObjects
 
         private void LoadMarginalsForAge()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\CensusAgeMarginal.csv")))
+			using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\Person Z-Stats.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
                 while ((strTok = myFileReader.ReadLine()) != null)
                 {
                     string[] strToken = strTok.Split(',');
-                    if (strToken[0] != "1004")
-                    {
-                        continue;
-                    }
-                    double n_zero = Double.Parse(strToken[1]);
-                    double n_one = Double.Parse(strToken[2]);
-                    double n_two = Double.Parse(strToken[3]);
-                    double n_three = Double.Parse(strToken[4]);
-                    double n_four = Double.Parse(strToken[5]);
-                    double n_five = Double.Parse(strToken[6]);
-                    double n_six = Double.Parse(strToken[7]);
-                    double n_seven = Double.Parse(strToken[8]);
+
+                    double n_zero = Double.Parse(strToken[11]);
+                    double n_one = Double.Parse(strToken[12]);
+                    double n_two = Double.Parse(strToken[13]);
+                    double n_three = Double.Parse(strToken[14]);
+                    double n_four = Double.Parse(strToken[15]);
+                    double n_five = Double.Parse(strToken[16]);
+                    double n_six = Double.Parse(strToken[17]);
+                    double n_seven = Double.Parse(strToken[18]);
+					double n_eight = Double.Parse(strToken[19]);
+					double n_nine = Double.Parse(strToken[20]);
+					double n_ten = Double.Parse(strToken[21]);
 
                     double sumD =
                         n_zero + n_one + n_two + n_three + n_four + n_five
-                        + n_six + n_seven;
+						+ n_six + n_seven + n_eight + n_nine + n_ten;
                     SpatialZone currZone =
                         (SpatialZone)ZonalCollection[strToken[0]];
                     if (sumD == 0.00)
                     {
-                        /*currZone.myHhldSize2Marginal.AddValue(
-                            "0", 0.15);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "1", 0.3);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "2", 0.2);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "3", 0.2);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "4", 0.05);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "5", 0.1);*/
+						// default values
+						currZone.myAgeMarginal.AddValue(
+							"0", 0.01);
+						currZone.myAgeMarginal.AddValue(
+							"1", 0.02);
+						currZone.myAgeMarginal.AddValue(
+							"2", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"3", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"4", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"5", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"6", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"7", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"8", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"9", 0.1);
+						currZone.myAgeMarginal.AddValue(
+							"10", 0.08);
                     }
                     else
                     {
@@ -1753,6 +1764,12 @@ namespace SimulationObjects
                             "6", n_six);
                         currZone.myAgeMarginal.AddValue(
                             "7", n_seven);
+						currZone.myAgeMarginal.AddValue(
+							"8", n_eight);
+						currZone.myAgeMarginal.AddValue(
+							"9", n_nine);
+						currZone.myAgeMarginal.AddValue(
+							"10", n_ten);
                     }
                 }
             }
@@ -1760,37 +1777,25 @@ namespace SimulationObjects
 
         private void LoadMarginalsForSex()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\CensusSexMarginal.csv")))
+			using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\Person Z-Stats.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
                 while ((strTok = myFileReader.ReadLine()) != null)
                 {
                     string[] strToken = strTok.Split(',');
-                    if (strToken[0] != "1004")
-                    {
-                        continue;
-                    }
-                    double n_zero = Double.Parse(strToken[1]);
-                    double n_one = Double.Parse(strToken[2]);
+                    double n_zero = Double.Parse(strToken[22]);
+                    double n_one = Double.Parse(strToken[23]);
 
                     double sumD = n_zero + n_one;
                     SpatialZone currZone =
                         (SpatialZone)ZonalCollection[strToken[0]];
                     if (sumD == 0.00)
                     {
-                        /*currZone.myHhldSize2Marginal.AddValue(
-                            "0", 0.15);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "1", 0.3);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "2", 0.2);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "3", 0.2);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "4", 0.05);
-                        currZone.myHhldSize2Marginal.AddValue(
-                            "5", 0.1);*/
+						currZone.mySexMarginal.AddValue(
+							"0", 0.49);
+						currZone.mySexMarginal.AddValue(
+							"1", 0.51);
                     }
                     else
                     {
