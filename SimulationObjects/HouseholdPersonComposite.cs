@@ -386,17 +386,6 @@ namespace SimulationObjects
 			
 		}
 
-	   /* public HouseholdPersonComposite(HouseholdPersonComposite HhPersonMediator)
-		{
-			SetAgentType(AgentType.HouseholdPersonMediator);
-			household = HhPersonMediator.household.CreateNewCopy();
-			persons = new List<Person>(HhPersonMediator.persons);
-			foreach (Person person in persons)
-				updateCounts(person);
-		}*/
-
-		/*Add only, it does not replace a value if it already exists.
-		 */
 		public void addPerson(Person p)
 		{
 			persons.Add(p);
@@ -415,12 +404,6 @@ namespace SimulationObjects
 
 		public HouseholdPersonComposite CreateNewCopy()
 		{
-		   /* MemoryStream m = new MemoryStream();
-			BinaryFormatter b = new BinaryFormatter();
-			b.Serialize(m, this);
-			m.Position = 0;
-			HouseholdPersonComposite myCopy = (HouseholdPersonComposite)b.Deserialize(m);
-			return myCopy;*/
 
 			HouseholdPersonComposite myCopy = (HouseholdPersonComposite)this.MemberwiseClone();
 			myCopy.persons = persons.ConvertAll(person => (Person)person.CreateNewCopy());
@@ -432,7 +415,7 @@ namespace SimulationObjects
 			int baseDimVal, int agentIndex/*from -1 to person (count-1). if -1 then it is a hhld object else person*/)
 		{
 			
-			HouseholdPersonComposite myCopy = (HouseholdPersonComposite)this.MemberwiseClone(); //TODO: changed copy method -MN
+			HouseholdPersonComposite myCopy = (HouseholdPersonComposite)this.MemberwiseClone();
 			myCopy.persons = persons.ConvertAll(person => (Person)person.CreateNewCopy());
 			myCopy.household = household.CreateNewCopy();
 			//change hhld
