@@ -361,14 +361,14 @@ namespace SimulationObjects
 			double r = 0.0;
 			//Sex
 			if (persons.Count () > 1) {
-				if (persons [1].GetSex () == persons [2].GetSex ()) {
+				if (persons [0].GetSex () == persons [1].GetSex ()) {
 					r = myrand.NextDouble ();
 					if (r < 0.5) {
-						persons [1].SetSex(Sex.Male);
-						persons [2].SetSex(Sex.Female);
-					} else {
+						persons [0].SetSex(Sex.Male);
 						persons [1].SetSex(Sex.Female);
-						persons [2].SetSex(Sex.Male);
+					} else {
+						persons [0].SetSex(Sex.Female);
+						persons [1].SetSex(Sex.Male);
 					}
 				}
 			}else if (persons.Count () == 1) {
