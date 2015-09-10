@@ -23,55 +23,15 @@ namespace Program
     {
         static void Main(string[] args)
         {
-           /* AgentType curTyp = new AgentType();
-            curTyp = AgentType.Person;
-            CreateUsingSimulation(curTyp);
-            //CreateConditionalsFromSample();
-            //CreateUsingIPF(curTyp);
 
-            ////////////////////////////////
-            ////////////////////////////////
-            World myWorld = new World();
-            for (int i = 0; i < 20; i++)
-            {
-                myWorld.CreatePersonPopulation(Constants.DATA_DIR 
-                    + "\\Person\\SyntheticPerson_AgeHhldSizeEdu.csv",
-                    Constants.DATA_DIR
-                    + "\\Person\\20\\SyntheticPersonRealization_AgeHhldSizeEdu" + i + ".csv", 28533);
-            }*/
             AgentType curTyp = new AgentType();
             curTyp = AgentType.HouseholdPersonComposite;
             CreateUsingSimulation(curTyp);
 
-            ////////////////////////////////
-            ////////////////////////////////
-            /*World myWorld = new World();
-           for (int i = 0; i < 20; i++)
-            {
-                myWorld.CreateHhldCompositePopulation(Constants.DATA_DIR
-                    + "\\HouseholdComposite\\SyntheticHhldComposite.csv",
-                    Constants.DATA_DIR
-                    + "\\HouseholdComposite\\20\\SyntheticHhldCompositeRealization_AgeHhldSizeEdu" + i + ".csv", 28533);
-            }*/
             Console.ReadLine();
         }
 
-/*        private static void CreateUsingIPF(AgentType currType)
-        {
 
-            IPFWorld currIPFWorld = new IPFWorld();
-            //currIPFWold.Initialize();
-            //currIPFWorld.CreatePopulationFromContTable1(Constants.DATA_DIR
-            //    +"IPF\\ContTabOut_20Per_CH1004.csv", Constants.DATA_DIR
-            //    +"IPF\\SyntheticPopulation_20Per_CH1004.csv");
-            currIPFWorld.ClonePopulationFromSample(Constants.DATA_DIR
-                + "IPF\\ContTabOut_01Per_r1.csv"
-                , Constants.DATA_DIR
-                + "IPF\\CH1004_01Per_Census2000.csv"
-                , Constants.DATA_DIR
-                + "IPF\\Output\\SyntheticPopulation_01Per_CH1004_r1.csv");
-        }
-*/
         private static void CreateUsingSimulation(AgentType currType)
         {
             if (currType == AgentType.Household)
@@ -121,44 +81,7 @@ namespace Program
             World currWorld = new World();
             
             currWorld.Initialize(false,AgentType.Household);
-            //currWorld.CreateHoseholdPopulationPool(Constants.DATA_DIR 
-            //    + "Household\\SyntheticHhld.csv");
 
-            //////////////////////////////////////////////
-            //// Realization of a population
-            /*for (int i = 0; i < 1; i++)
-            {
-                currWorld.CreatePopulationByDwellingType((int)DateTime.Now.Ticks,
-                                    Constants.DATA_DIR + "Household\\SyntheticHhld.csv",
-                                    Constants.DATA_DIR + "Household\\PopRealization" + i.ToString() + ".csv");
-            }*/
-
-            //// Commune Level Statistics
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    currWorld.ComputeCommuneLevelStatisticsPeople(Constants.DATA_DIR
-            //            + "PopRealization" + i + ".csv",
-            //            Constants.DATA_DIR + "ComunePerStats_NoIS" + i + ".csv",
-            //            Constants.DATA_DIR + "CommuneList.csv");
-            //    currWorld.ComputeCommuneLevelStatisticsCars(Constants.DATA_DIR
-            //            + "PopRealization" + i + ".csv",
-            //            Constants.DATA_DIR + "ComuneCarStats_NoIS" + i + ".csv",
-            //            Constants.DATA_DIR + "CommuneList.csv");
-            //}
-
-            /*int[] currDimCat = { 6,3,3,3,5,4,4};
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 2; j < 8; j++)
-                {
-                    currWorld.ComputeSectorLevelStatistics(Constants.DATA_DIR
-                            + "PopRealization" + i + ".csv", 9 , j,currDimCat[j-2]);
-                }
-            }*/
-
-            //////////////////////////////////////////////
-
-            ///////////////////////
             var runsListZero = new List<Dictionary<string, World.ZonalStat>>();
             var runsListOne = new List<Dictionary<string, World.ZonalStat>>();
             var runsListTwo = new List<Dictionary<string, World.ZonalStat>>();
@@ -184,13 +107,6 @@ namespace Program
                         "Household\\CommuneList.csv", runsListTwo, 2);
             World.WriteMCStatsToFile(Constants.DATA_DIR +
                         "Household\\CommuneList.csv", runsListThree, 3);
-            //////////////////////////////
-
-
-            //ConditionalGenerator myCondGen = new ConditionalGenerator();
-            //    myCondGen.GenerateConditionals(
-            //    Constants.DATA_DIR + "MobelDataset.csv",
-            //    Constants.DATA_DIR + "MobelDimensions.csv");
         }
 
         private static void CreateConditionalsFromSample()
