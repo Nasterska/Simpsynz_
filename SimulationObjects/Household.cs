@@ -166,17 +166,29 @@ namespace SimulationObjects
         {
             switch (size)
             {
-                case (HouseholdSize.SingleAdult):
-                case (HouseholdSize.OneAdultOneChild):
-                    numberOfAdults = 1;
+				case (HouseholdSize.SingleAdult):
+					numberOfAdults = 1;
+					myHhhldSize = HouseholdSize.SingleAdult;
+					break;
+				case (HouseholdSize.OneAdultOneChild):
+					numberOfAdults = 1;
+					myHhhldSize = HouseholdSize.OneAdultOneChild;
                     break;
                 case (HouseholdSize.Twoadults):
-                case (HouseholdSize.TwoAdultsChildren):
+					myHhhldSize = HouseholdSize.Twoadults;
+					numberOfAdults = 2;
+					break;
+				case (HouseholdSize.TwoAdultsChildren):
+					myHhhldSize = HouseholdSize.TwoAdultsChildren;
                     numberOfAdults = 2;
                     break;
-                case (HouseholdSize.ThreeOrMoreAdults):
-                case (HouseholdSize.ThreeOrMoreAdultsChildren):
-                    numberOfAdults = 3;
+				case (HouseholdSize.ThreeOrMoreAdults):
+					myHhhldSize = HouseholdSize.ThreeOrMoreAdults;
+					numberOfAdults = 3;
+					break;
+				case (HouseholdSize.ThreeOrMoreAdultsChildren):
+					myHhhldSize = HouseholdSize.ThreeOrMoreAdultsChildren;
+					numberOfAdults = 3;
                     break;
                 default:
                     break;
