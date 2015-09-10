@@ -182,7 +182,7 @@ namespace SimulationObjects
             mySexMarginal.SetDimensionName("Sex");
 
             myAgeMarginal = new DiscreteMarginalDistribution();
-            myAgeMarginal.SetDimensionName("MaritalStatus");
+            myAgeMarginal.SetDimensionName("Age");
 
             myEducationMarginal = new DiscreteMarginalDistribution();
             myEducationMarginal.SetDimensionName("EducationLevel");
@@ -246,7 +246,20 @@ namespace SimulationObjects
             hhldControlTotal.Value = val;
         }
 
-        public List<ConditionalDistribution> GetDataHhldCompositeCollectionsList()
+		public List<ConditionalDistribution> GetDataHhldCompositeCollectionsListP()
+		{
+			List<ConditionalDistribution> currColl = new List<ConditionalDistribution>();
+
+			currColl.Add(modelEmploymentStatus);
+			currColl.Add(modelAgeConditionals);
+			//   currColl.Add(modelPublicTransitConditionals);
+			currColl.Add(modelOccupationConditionals);
+			currColl.Add(modelSexConditionals);
+			currColl.Add(modelDriverLicenseConditionals);
+			return currColl;
+		}
+
+        public List<ConditionalDistribution> GetDataHhldCompositeCollectionsListH()
         {
             List<ConditionalDistribution> currColl = new List<ConditionalDistribution>();
          //   currColl.Add(modelIncConditionals);
@@ -256,16 +269,29 @@ namespace SimulationObjects
          // currColl.Add(modelNumberOfPeopleConditionals); 
             currColl.Add(modelKidsConditionals);
          //   currColl.Add(modelHouseHoldTypeConditionals);           
-
-
-            currColl.Add(modelEmploymentStatus);
-            currColl.Add(modelAgeConditionals);
-         //   currColl.Add(modelPublicTransitConditionals);
-            currColl.Add(modelOccupationConditionals);
-            currColl.Add(modelSexConditionals);
-            currColl.Add(modelDriverLicenseConditionals);
             return currColl;
         }
+
+		public List<ConditionalDistribution> GetDataHhldCompositeCollectionsListPH()
+		{
+			List<ConditionalDistribution> currColl = new List<ConditionalDistribution>();
+			//   currColl.Add(modelIncConditionals);
+			//   currColl.Add(modelUnivDegConditionals);
+			currColl.Add(modelDwellConditionals);
+			currColl.Add(modelCarsConditionals);
+			// currColl.Add(modelNumberOfPeopleConditionals); 
+			currColl.Add(modelKidsConditionals);
+			//   currColl.Add(modelHouseHoldTypeConditionals);           
+
+
+			currColl.Add(modelEmploymentStatus);
+			currColl.Add(modelAgeConditionals);
+			//   currColl.Add(modelPublicTransitConditionals);
+			currColl.Add(modelOccupationConditionals);
+			currColl.Add(modelSexConditionals);
+			currColl.Add(modelDriverLicenseConditionals);
+			return currColl;
+		}
 
         public List<ConditionalDistribution> GetDataHhldCollectionsList()
         {
