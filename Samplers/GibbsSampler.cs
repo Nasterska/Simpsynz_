@@ -93,9 +93,14 @@ namespace Samplers
                         OutputFileWriter currWriter)
         {
             int seltdDim = 0;
-            List<ConditionalDistribution> condList = currZone.GetDataHhldCompositeCollectionsList();
+			int seltAgnt = 0;
+            List<ConditionalDistribution> condHhldList = currZone.GetDataHhldCompositeCollectionsListH();
+			List<ConditionalDistribution> condPerList = currZone.GetDataHhldCompositeCollectionsListP();
+
             var generatedAgents = new List<SimulationObject>();
             HouseholdPersonComposite prevAgent = initAgent;
+			ImportanceSampler currImpSampler = new ImportanceSampler();
+			Random rnd = new Random();
 
             int iter = 0;
             if (warmUpStatus == true)
@@ -110,17 +115,45 @@ namespace Samplers
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < iter; i++)
             {
-                seltdDim = randGen.NextInRange(0, condList.Count - 1);
+				// with equal probablity select one of the hhld or persons
+				seltAgnt = randGen.NextInRange(0, prevAgent.getPersons().Count());
+				//Change Hhld object
+				if (seltAgnt == 0) {
+					seltdDim = randGen.NextInRange(0, condHhldList.Count - 1);
+					ConditionalDistribution currDist = condHhldList[seltdDim];
 
-                ConditionalDistribution currDist = condList[seltdDim];
-                Random rnd = new Random();
-                int personId = rnd.Next(0, prevAgent.getPersons().Count);
-                {
-                    var currComm = currDist.GetCommulativeValue(
-                        prevAgent
-                        , currZone, personId);
-                    newAgent = (HouseholdPersonComposite)GenerateNextAgent(currComm, prevAgent,
-                        currDist.GetDimensionName(), personId);
+					var currComm = currDist.GetCommulativeValue (
+						prevAgent
+						, currZone, -1);
+					newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
+						currDist.GetDimensionName (), -1);
+				}
+				//Change person object
+				else {
+					seltdDim = randGen.NextInRange(0, condPerList.Count - 1);
+					ConditionalDistribution currDist = condPerList[seltdDim];
+
+					// Select randomly one person from the collection, whose attribute is changed
+					int personId = rnd.Next(0, prevAgent.getPersons().Count - 1);
+
+					// Importance sampling for the Age
+					if (currDist.GetDimensionName() == "Age")
+					{
+						newAgent = (HouseholdPersonComposite) currImpSampler.GetNextAgent(
+							currZone.GetHousholdSizeDist(),
+							currDist, currDist.GetDimensionName(),
+							prevAgent, currZone, personId);
+					}
+					else
+					{
+						var currComm = currDist.GetCommulativeValue (
+							prevAgent
+							, currZone, personId);
+						newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
+							currDist.GetDimensionName (), personId);
+					}
+					//Consistency check
+					((HouseholdPersonComposite) newAgent).CheckConsistency();
                 }
 
                 prevAgent = newAgent;
@@ -217,7 +250,7 @@ namespace Samplers
                     newAgent = (Household)currImpSampler.GetNextAgent(
                         currZone.GetHousholdSizeDist(),
                         currDist, currDist.GetDimensionName(),
-                        prevAgent, currZone);
+                        prevAgent, currZone,0);
                 }
                 else
                 {
@@ -298,7 +331,7 @@ namespace Samplers
                     newAgent = (Person)currImpSampler.GetNextAgent(
                                 currZone.mySexMarginal,
                                 currDist, currDist.GetDimensionName(),
-                                (SimulationObject)prevAgent, currZone);
+                                (SimulationObject)prevAgent, currZone,0);
                 }
                 /*else if (currDist.GetDimensionName() == "EducationLevel")
                 {
@@ -337,7 +370,7 @@ namespace Samplers
         private SimulationObject GenerateNextAgent(List<KeyValPair> curCom,
             SimulationObject prvAgnt, string genDim, int personId)
         {
-            double currMax = (double)
+			double currMax = (double)
                 ((KeyValPair)curCom[curCom.Count - 1]).Value;
             if (currMax != 0.00)
             {
