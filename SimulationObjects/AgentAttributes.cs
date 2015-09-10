@@ -32,9 +32,10 @@ namespace SimulationObjects
 
     public enum DwellingType
     {
-        House = 0,
-        Apartment = 1,
-        Townhouse = 2
+		House = 0,
+		Apartment = 1,
+		Townhouse = 2,
+		Unknown = 3
     };
 
     public enum NumOfCars
@@ -93,16 +94,19 @@ namespace SimulationObjects
 
     public enum HouseholdType
     {
-        SinglePersonHhld = 0,
-        FamilyHhld = 1,
-        NonFamilyHhld = 2,
-        Collectivehhld = 3
+		SingleAdult = 0,
+		OneAdultOneChild = 1,
+		Twoadults = 2,
+		TwoAdultsChildren = 3,
+		ThreeOrMoreAdults = 4,
+		ThreeOrMoreAdultsChildren = 5
     };
 
     public enum Sex
     {
         Male = 0,
-        Female = 1
+        Female = 1,
+		unknown = 2
     };
 
     public enum MaritalStatus
@@ -123,11 +127,12 @@ namespace SimulationObjects
 
     public enum EmploymentStatus
     {
-        Unemployed = 0,
-        FullTime = 1,
-        FullTimeHome = 2,
-        PartTime = 3,
-        PartTimeHome = 4,
+		Unemployed = 0,
+		FullTime = 1,
+		FullTimeHome = 2,
+		PartTime = 3,
+		PartTimeHome = 4,
+		Unknown = 5
     };
 
 
