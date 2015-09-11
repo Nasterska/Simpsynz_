@@ -295,8 +295,10 @@ namespace SimulationObjects
 				builderPers.Append("HouseholdID,PersonNumber,Age,Sex,License,TransitPass,EmploymentStatus,Occupation,FreeParking,StudentStatus,EmploymentZone,SchoolZone");
 
 				agentsOutputFile.WriteToFile(builderHhld.ToString());
+                
 				String[] cc = fileName.Split ('.');
-				OutputFileWriter personOutputFile = new OutputFileWriter (cc + "pers.csv");
+				OutputFileWriter personOutputFile = new OutputFileWriter (cc[0] + "pers.csv");
+                personOutputFile.WriteToFile(builderPers.ToString());
 
                 foreach (var entry in ZonalCollection)
                 {

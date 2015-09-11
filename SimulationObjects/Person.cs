@@ -61,7 +61,7 @@ namespace SimulationObjects
 				contAge = (uint) nRand.Next (18,26);
 				break;
 			case Age.TwentySixToThirty:
-				contAge = (uint) nRand.Next (26+31);
+				contAge = (uint) nRand.Next (26,31);
 				break;
 			case Age.ThirtyOneToForty:
 				contAge = (uint) nRand.Next (31,41);

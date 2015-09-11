@@ -20,15 +20,23 @@ namespace PopulationSynthesis.Utils
         private StreamWriter Writer;
         private MemoryStream MemoryBackend;
 
+		private string myFileName;
+		public string GetFileName()
+		{
+			return myFileName;
+		}
+
         public OutputFileWriter(string fileName)
         {
             Writer = new StreamWriter(fileName);
+			myFileName = fileName;
         }
 
         public OutputFileWriter()
         {
             MemoryBackend = new MemoryStream();
             Writer = new StreamWriter(MemoryBackend);
+			myFileName = "xxx.csv";
         }
 
         public void WriteToFile(string currOutput)
