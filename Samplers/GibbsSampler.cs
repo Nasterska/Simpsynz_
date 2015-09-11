@@ -316,22 +316,6 @@ namespace Samplers
 
                 DiscreteCondDistribution currDist =
                     (DiscreteCondDistribution)condList[seltdDim];
-
-                /*if (currDist.GetDimensionName() == "HouseholdSize2")
-                {
-                    newAgent = (Person) currImpSampler.GetNextAgent(
-                                currZone.myHhldSize2Marginal,
-                                currDist, currDist.GetDimensionName(),
-                                (SimulationObject) prevAgent, currZone);
-                }
-                else if (currDist.GetDimensionName() == "Age")
-                {
-                    newAgent = (Person)currImpSampler.GetNextAgent(
-                                currZone.myAgeMarginal,
-                                currDist, currDist.GetDimensionName(),
-                                (SimulationObject)prevAgent, currZone);
-                }
-                else*/
                 if(currDist.GetDimensionName() == "Sex")
                 {
                     newAgent = (Person)currImpSampler.GetNextAgent(
@@ -391,7 +375,6 @@ namespace Samplers
                     }
                 }
                 throw new Exception();
-
             }
             else
             {
