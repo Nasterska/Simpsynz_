@@ -66,22 +66,23 @@ namespace Samplers
         public List<SimulationObject> GenerateAgents(SpatialZone currZone, int numAgents,
                         SimulationObject initAgent, bool warmUpStatus,
                         List<ConditionalDistribution> mobelCond,
-                        OutputFileWriter currWriter)
+						OutputFileWriter currHhldWriter, OutputFileWriter currPersWriter)
         {
+			
             switch(initAgent.GetAgentType())
             {
                 case AgentType.Household:
-                return GenerateHousholds(currZone, numAgents,
+	                return GenerateHousholds(currZone, numAgents,
                                     (Household)initAgent, warmUpStatus,
-                                        mobelCond, currWriter);
+					mobelCond, currHhldWriter);
                 case AgentType.Person:
                     return GeneratePersons(currZone, numAgents,
                                     (Person)initAgent, warmUpStatus,
-                                        currWriter);
+					currHhldWriter);
                 case AgentType.HouseholdPersonComposite:
-                    return GenerateHousholdsComposite(currZone, numAgents,
+				return GenerateHousholdsComposite(currZone, numAgents,
                                     (HouseholdPersonComposite)initAgent, warmUpStatus,
-                                        null, currWriter);
+					currHhldWriter,currPersWriter);
             }
             return null;
         }
@@ -89,18 +90,18 @@ namespace Samplers
 
         private List<SimulationObject> GenerateHousholdsComposite(SpatialZone currZone, int numHousehold,
                         HouseholdPersonComposite initAgent, bool warmUpStatus,
-                        List<ConditionalDistribution> mobelCond,
-                        OutputFileWriter currWriter)
+                        OutputFileWriter currWriterHhld, OutputFileWriter currWriterPers)
         {
             int seltdDim = 0;
-            int seltAgnt = 0;
+			int seltAgnt = 0;
+
             List<ConditionalDistribution> condHhldList = currZone.GetDataHhldCompositeCollectionsListH();
-            List<ConditionalDistribution> condPerList = currZone.GetDataHhldCompositeCollectionsListP();
+			List<ConditionalDistribution> condPerList = currZone.GetDataHhldCompositeCollectionsListP();
 
             var generatedAgents = new List<SimulationObject>();
             HouseholdPersonComposite prevAgent = initAgent;
-            ImportanceSampler currImpSampler = new ImportanceSampler();
-            Random rnd = new Random();
+			ImportanceSampler currImpSampler = new ImportanceSampler();
+			Random rnd = new Random();
 
             int iter = 0;
             if (warmUpStatus == true)
@@ -112,77 +113,82 @@ namespace Samplers
                 iter = Constants.SKIP_ITERATIONS * numHousehold;
             }
             HouseholdPersonComposite newAgent;
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builderHhld = new StringBuilder();
+			StringBuilder builderPers = new StringBuilder();
+
             for (int i = 0; i < iter; i++)
             {
-                // with equal probablity select one of the hhld or persons
-                seltAgnt = randGen.NextInRange(0, prevAgent.getPersons().Count());
-                //Change Hhld object
-                if (seltAgnt == 0) {
-                    seltdDim = randGen.NextInRange(0, condHhldList.Count - 1);
-                    ConditionalDistribution currDist = condHhldList[seltdDim];
+				// with equal probablity select one of the hhld or persons
+				seltAgnt = randGen.NextInRange(0, prevAgent.getPersons().Count());
+				//Change Hhld object
+				if (seltAgnt == 0) {
+					seltdDim = randGen.NextInRange(0, condHhldList.Count - 1);
+					ConditionalDistribution currDist = condHhldList[seltdDim];
 
-                    var currComm = currDist.GetCommulativeValue (
-                        prevAgent
-                        , currZone, -1);
-                    newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
-                        currDist.GetDimensionName (), -1);
-                }
-                //Change person object
-                else {
-                    seltdDim = randGen.NextInRange(0, condPerList.Count - 1);
-                    ConditionalDistribution currDist = condPerList[seltdDim];
+					var currComm = currDist.GetCommulativeValue (
+						prevAgent
+						, currZone, -1);
+					newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
+						currDist.GetDimensionName (), -1);
+				}
+				//Change person object
+				else {
+					seltdDim = randGen.NextInRange(0, condPerList.Count - 1);
+					ConditionalDistribution currDist = condPerList[seltdDim];
 
-                    // Select randomly one person from the collection, whose attribute is changed
-                    int personId = rnd.Next(0, prevAgent.getPersons().Count - 1);
+					// Select randomly one person from the collection, whose attribute is changed
+					int personId = rnd.Next(0, prevAgent.getPersons().Count - 1);
 
-                    // Importance sampling for the Age
-                    if (currDist.GetDimensionName() == "Age")
-                    {
-                        newAgent = (HouseholdPersonComposite) currImpSampler.GetNextAgent(
-                            currZone.GetHousholdSizeDist(),
-                            currDist, currDist.GetDimensionName(),
-                            prevAgent, currZone, personId);
-                    }
-                    else
-                    {
-                        var currComm = currDist.GetCommulativeValue (
-                            prevAgent
-                            , currZone, personId);
-                        newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
-                            currDist.GetDimensionName (), personId);
-                    }
-                    //Consistency check
-                    ((HouseholdPersonComposite) newAgent).CheckConsistency();
+					// Importance sampling for the Age
+					if (currDist.GetDimensionName() == "Age")
+					{
+						newAgent = (HouseholdPersonComposite) currImpSampler.GetNextAgent(
+							currZone.GetHousholdSizeDist(),
+							currDist, currDist.GetDimensionName(),
+							prevAgent, currZone, personId);
+					}
+					else
+					{
+						var currComm = currDist.GetCommulativeValue (
+							prevAgent
+							, currZone, personId);
+						newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
+							currDist.GetDimensionName (), personId);
+					}
+					//Consistency check
+					((HouseholdPersonComposite) newAgent).CheckConsistency();
                 }
 
                 prevAgent = newAgent;
                 if (warmUpStatus == false && (i % Constants.SKIP_ITERATIONS == 0))
                 {
                     generatedAgents.Add(newAgent);
-                    builder.Append(newAgent.getHousehold().GetZoneID()); builder.Append(',');
-                    builder.Append((int)newAgent.getHousehold().GetDwellingType()); builder.Append(',');
-                    builder.Append((int)newAgent.getHousehold().GetHhldSize()); builder.Append(',');
-                    builder.Append((int)newAgent.getHousehold().GetNumOfKids()); builder.Append(',');
-                    builder.Append((int)newAgent.getHousehold().GetNumOfCars()); builder.Append(',');
-                    //builder.Append(currZone.GetEPFLName()); builder.Append(',');
-                    //builder.Append((int)newAgent.getHousehold().GetNumOfWorkers()); builder.Append(',');
-                    //builder.Append((int)newAgent.getHousehold().GetNumOfUnivDegree()); builder.Append(',');
-                    //builder.Append((int)newAgent.getHousehold().GetIncomeLevel()); builder.Append(',');
+					builderHhld.Append(newAgent.getHousehold().GetAgentID()); builderHhld.Append(',');
+					builderHhld.Append(newAgent.getHousehold().GetZoneID()); builderHhld.Append(',');
+					builderHhld.Append(',');
+					builderHhld.Append((int)newAgent.getHousehold().GetDwellingType()); builderHhld.Append(',');
+					builderHhld.Append((int)newAgent.getHousehold().GetHhldSize()); builderHhld.Append(',');
+					builderHhld.Append((int)newAgent.getHousehold().GetNumOfKids()); builderHhld.Append(',');
+					builderHhld.Append((int)newAgent.getHousehold().GetNumOfCars()); builderHhld.Append(',');
+                    int personNumber = 1;
 
                     foreach (Person person in newAgent.getPersons())
                     {
-                        builder.Append((int)person.GetAge()); builder.Append(',');
-                        builder.Append((int)person.GetDrivingLicense()); builder.Append(',');
-                        builder.Append((int)person.GetEmploymentStatus()); builder.Append(',');
-                        builder.Append((int)person.GetOccupation()); builder.Append(',');
-                        builder.Append((int)person.GetSex());
-                        //builder.Append((int)person.GetEducationLevel());
+						builderPers.Append((int)newAgent.getHousehold().GetAgentID()); builderPers.Append(',');
+						builderPers.Append(personNumber++); builderPers.Append(',');
+						builderPers.Append((int)person.GetContAge()); builderPers.Append(',');
+						builderPers.Append((int)person.GetSex()); builderPers.Append(',');
+						builderPers.Append((int)person.GetDrivingLicense()); builderPers.Append(',');
+						builderPers.Append('0'); builderPers.Append(',');
+						builderPers.Append((int)person.GetEmploymentStatus()); builderPers.Append(',');
+						builderPers.Append((int)person.GetOccupation()); builderPers.Append(',');
+						builderPers.Append("0,0,0,0");
+
+						currWriterPers.WriteToFile(builderPers.ToString());
+						builderPers.Clear ();
                     }
-
-
-                    currWriter.WriteToFile(builder.ToString());
-                    builder.Clear();
+                    currWriterHhld.WriteToFile(builderHhld.ToString());
+                    builderHhld.Clear();
                 }
             }
             return generatedAgents;
@@ -370,7 +376,7 @@ namespace Samplers
         private SimulationObject GenerateNextAgent(List<KeyValPair> curCom,
             SimulationObject prvAgnt, string genDim, int personId)
         {
-            double currMax = (double)
+			double currMax = (double)
                 ((KeyValPair)curCom[curCom.Count - 1]).Value;
             if (currMax != 0.00)
             {

@@ -362,70 +362,6 @@ namespace SimulationObjects
             }
         }
 
-        /*public void CreatePersonPopulationPool(string fileName)
-        {
-            TextReader myFileReader = new StreamReader(Constants.DATA_DIR +
-            "Person\\PD_hhldType.csv");
-            string strTok;
-            myFileReader.ReadLine();
-            List<double[]> PD = new List<double[]>();
-            while ((strTok = myFileReader.ReadLine()) != null)
-            {
-                string[] strToken = strTok.Split(',');
-
-                double SingleAdult = Double.Parse(strToken[1]);
-                double OneAdultOneChild = Double.Parse(strToken[2]);
-                double Twoadults = Double.Parse(strToken[3]);
-                double TwoAdultsChildren = Double.Parse(strToken[4]);
-                double ThreeOrMoreAdults = Double.Parse(strToken[5]);
-                double ThreeOrMoreAdultsChildren = Double.Parse(strToken[6]);
-
-                double[] hhldTypes = { SingleAdult, OneAdultOneChild, Twoadults, TwoAdultsChildren
-                                     , ThreeOrMoreAdults, ThreeOrMoreAdultsChildren};
-                PD.Add(hhldTypes);
-
-            }
-            myFileReader.Close();
-
-            using (var agentsOutputFile = new OutputFileWriter(fileName))
-            {
-                var mobelCond = new List<ConditionalDistribution>();
-                foreach (var entry in ZonalCollection)
-                {
-                    SpatialZone currZone = (SpatialZone)entry.Value;
-                    if (currZone.GetName() != "1004")
-                    {
-                        continue;
-                    }
-                    foreach (HouseholdSize val in Enum.GetValues(typeof(HouseholdSize)))
-                    {
-                        var rangePartitioner = Partitioner.Create(0, Constants.POOL_COUNT);
-                        Parallel.ForEach(rangePartitioner, (range, loopState) =>
-                        {
-                            using (var localWriter = new OutputFileWriter())
-                            {
-                                GibbsSampler sampler = new GibbsSampler();
-                                var amountToSample = range.Item2 - range.Item1;
-                                // warmup time
-                                sampler.GenerateAgents(currZone,
-                                                Constants.WARMUP_ITERATIONS,
-                                                new Person(currZone.GetName()), true,
-                                                mobelCond,
-                                                localWriter);
-                                PersonPool.Clear();
-                                // actual generation
-                                PersonPool = sampler.GenerateAgents(currZone,
-                                                amountToSample,
-                                                new Person(currZone.GetName()), false,
-                                                mobelCond,
-                                                localWriter);
-                                localWriter.CopyTo(agentsOutputFile);
-                            }
-                        });
-                    }
-                }
-            }
-        }*/
         public void CreatePersonPopulationPool(string fileName)
         {
             using (var agentsOutputFile = new OutputFileWriter(fileName))
@@ -487,10 +423,6 @@ namespace SimulationObjects
 
         private void CreateSpatialZones()
         {
-            /*SpatialZone currZone = new SpatialZone();
-            currZone.SetName("1004");
-            ZonalCollection.Add("1004", currZone);*/
-
             using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "PD_hhldType.txt")))
             {
                 string strTok;
@@ -1410,10 +1342,6 @@ namespace SimulationObjects
                         if (currRandGen.NextDouble() < 0.5 && currCnt < cnt)
                         {
                             currCnt++;
-                            /*currOutputFile.WriteLine(currStrTok[0]
-                                                    + "," + currStrTok[2]
-                                                    + "," + currStrTok[3]
-                                                    + "," + currStrTok[4]);*/
                             // we can just write the file back since it is just parsing CSV to begin with
                             currOutputFile.WriteLine(currInStr);
                         }
