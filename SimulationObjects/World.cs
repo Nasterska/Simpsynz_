@@ -310,14 +310,14 @@ namespace SimulationObjects
                         sampler.GenerateAgents(currZone,
                                         Constants.WARMUP_ITERATIONS,
 							new HouseholdPersonComposite(new Household(size, currZone.GetName())), true, null,
-							agentsOutputFile,null);
+							agentsOutputFile,personOutputFile);
                         HhldscompositePool.Clear();
                         sampler.SetAgentCounter(agentsCreated + counter);
                         // actual generation
                         HhldscompositePool = sampler.GenerateAgents(currZone,
                                         Constants.POOL_COUNT * type_entry,
 							new HouseholdPersonComposite(new Household(size, currZone.GetName())), false,  null,
-							agentsOutputFile,null);
+							agentsOutputFile,personOutputFile);
                         agentsCreated += (uint)HhldscompositePool.Count;
                     }
                 }
