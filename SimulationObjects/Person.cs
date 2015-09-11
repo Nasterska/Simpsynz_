@@ -39,6 +39,54 @@ namespace SimulationObjects
         {
             Age = curAge;
         }
+		private uint contAge;
+		public uint GetContAge()
+		{
+			Random nRand = new Random ();
+			switch(Age)
+			{
+			case Age.LessThanEleven:
+				contAge = (uint) nRand.Next(1,11);
+				break;
+			case Age.ElevenToThirteen:
+				contAge = (uint) nRand.Next (11,14);
+				break;
+			case Age.FourteenToFifteen:
+				contAge = (uint) nRand.Next (14,16);
+				break;
+			case Age.SixteenToSeventeen:
+				contAge = (uint) nRand.Next(16,18);
+				break;
+			case Age.EighteenToTwentyFive:
+				contAge = (uint) nRand.Next (18,26);
+				break;
+			case Age.TwentySixToThirty:
+				contAge = (uint) nRand.Next (26+31);
+				break;
+			case Age.ThirtyOneToForty:
+				contAge = (uint) nRand.Next (31,41);
+				break;
+			case Age.FortyOneToFifty:
+				contAge = (uint) nRand.Next (41,51);
+				break;
+			case Age.FiftyOneToFiftyFour:
+				contAge = (uint) nRand.Next (51,55);
+				break;
+			case Age.FiftyfiveToSixtyFour:
+				contAge = (uint) nRand.Next (55,65);
+				break;
+			case Age.MoreThanSixtyFive:
+				contAge = (uint) nRand.Next (65,88);
+				break;
+			default:
+				return 0;
+			}
+			return contAge;
+		}
+		public void SetContAge(uint curAge)
+		{
+			contAge = curAge;
+		}
         private Sex Sex;
         public Sex GetSex()
         {
@@ -111,6 +159,7 @@ namespace SimulationObjects
             Age = Age.ThirtyOneToForty;
             EducationLevel = EducationLevel.primary;
             Type = AgentType.Person;
+			myID = idCounter++;
         }
 
         public Person(string currZone)
@@ -125,6 +174,7 @@ namespace SimulationObjects
             EmploymentStatus = EmploymentStatus.PartTime;
             DrivingLicense = DrivingLicense.No;
             Type = AgentType.Person;
+			myID = idCounter++;
         }
 
         private Person(Person original)
@@ -140,6 +190,7 @@ namespace SimulationObjects
             EmploymentStatus = original.EmploymentStatus;
             DrivingLicense = original.DrivingLicense;
             household = original.household;
+			myID = idCounter++;
         }
 
         [ThreadStatic]
