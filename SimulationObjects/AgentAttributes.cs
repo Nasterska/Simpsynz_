@@ -160,12 +160,12 @@ namespace SimulationObjects
 
     public enum Occupation
     {
-        GeneralOffice = 0,
-        ClericalManufacturing = 1,
-        Construction = 2,
-        TradesProfessional = 3,
-        Management = 4,
-        TechnicalRetailSalesServiceNotEmployedUnknown = 5
+        GeneralOfficeClerical = 0,
+        ManufacturingConstructionTrades = 1,
+        ProfessionalManagementTechnical = 2,
+        RetailSalesService = 3,
+        NotEmployed = 4
+        //Unknown = 5
     }
 
     public enum PublicTransitPass 
