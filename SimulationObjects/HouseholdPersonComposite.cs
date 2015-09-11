@@ -323,7 +323,7 @@ namespace SimulationObjects
 				person.SetHhld(household);
 				updateCounts(person);
 			}
-
+			myID = idCounter++;
 		}
 
 		void fillHouseholdWithPersons()
