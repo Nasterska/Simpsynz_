@@ -144,6 +144,7 @@ namespace SimulationObjects
             myIncomeLevel = IncomeLevel.SeventyFiveToOneTwentyFive;
             myIncome = 80000;
             Type = AgentType.Household;
+			myID = idCounter++;
         }
 
         private Household(Household copyFrom)
@@ -160,10 +161,12 @@ namespace SimulationObjects
             myIncome = copyFrom.myIncome;
             Type = copyFrom.Type;
             myZoneID = copyFrom.myZoneID;
+			myID = idCounter++;
         }
 
         public Household(HouseholdSize size, string currZone)
         {
+			myID = idCounter++;
             switch (size)
             {
 				case (HouseholdSize.SingleAdult):
@@ -219,6 +222,7 @@ namespace SimulationObjects
             myIncomeLevel = IncomeLevel.SeventyFiveToOneTwentyFive;
             myIncome = 80000;
             Type = AgentType.Household;
+			myID = idCounter++;
         }
 
         // Returns a string that gives the value of characteristics
