@@ -288,10 +288,15 @@ namespace SimulationObjects
             {
                 uint agentsCreated = 1;
                 uint counter = 0;
-                StringBuilder builder = new StringBuilder();
-                builder.Append("ZoneID,DwellingType,HouseholdType,NumberOfChildren,NumberOfVehicles,");
-                builder.Append("Age,DriverLicense,EmplyomentStatus,Occupation,Sex");
-                agentsOutputFile.WriteToFile(builder.ToString());
+                StringBuilder builderHhld = new StringBuilder();
+				builderHhld.Append("HouseholdID,Zone,ExpansionFactor,DwellingType,NumberOfPersons,NumberOfVehicles");
+
+				StringBuilder builderPers = new StringBuilder();
+				builderPers.Append("HouseholdID,PersonNumber,Age,Sex,License,TransitPass,EmploymentStatus,Occupation,FreeParking,StudentStatus,EmploymentZone,SchoolZone");
+
+				agentsOutputFile.WriteToFile(builderHhld.ToString());
+				String[] cc = fileName.Split ('.');
+				OutputFileWriter personOutputFile = new OutputFileWriter (cc + "pers.csv");
 
                 foreach (var entry in ZonalCollection)
                 {
@@ -301,20 +306,18 @@ namespace SimulationObjects
                     foreach (HouseholdSize size in Enum.GetValues(typeof(HouseholdSize)))
                     {
                         var type_entry = types[(int)size];
-                        // warmup time 
+                        // warmup time
                         sampler.GenerateAgents(currZone,
                                         Constants.WARMUP_ITERATIONS,
-                                        new HouseholdPersonComposite(new Household(size, currZone.GetName())), true,
-                                        null,
-                                        agentsOutputFile);
+							new HouseholdPersonComposite(new Household(size, currZone.GetName())), true, null,
+							agentsOutputFile,null);
                         HhldscompositePool.Clear();
                         sampler.SetAgentCounter(agentsCreated + counter);
                         // actual generation
                         HhldscompositePool = sampler.GenerateAgents(currZone,
                                         Constants.POOL_COUNT * type_entry,
-                                        new HouseholdPersonComposite(new Household(size, currZone.GetName())), false,
-                                        null,
-                                        agentsOutputFile);
+							new HouseholdPersonComposite(new Household(size, currZone.GetName())), false,  null,
+							agentsOutputFile,null);
                         agentsCreated += (uint)HhldscompositePool.Count;
                     }
                 }
@@ -343,7 +346,7 @@ namespace SimulationObjects
                                     Constants.WARMUP_ITERATIONS,
                                     new Household(currZone.GetName()), true,
                                     mobelCond,
-                                    agentsOutputFile);
+						agentsOutputFile, null);
                     HhldsPool.Clear();
                     sampler.SetAgentCounter(agentsCreated + counter);
                     // actual generation
@@ -351,7 +354,7 @@ namespace SimulationObjects
                                     Constants.POOL_COUNT,
                                     new Household(currZone.GetName()), false,
                                     mobelCond,
-                                    agentsOutputFile);
+						agentsOutputFile,null);
                     agentsCreated += (uint)HhldsPool.Count;
                 }
             }
@@ -445,14 +448,14 @@ namespace SimulationObjects
                                             Constants.WARMUP_ITERATIONS,
                                             new Person(currZone.GetName()), true,
                                             mobelCond,
-                                            localWriter);
+									localWriter,null);
                             PersonPool.Clear();
                             // actual generation
                             PersonPool = sampler.GenerateAgents(currZone,
                                             amountToSample,
                                             new Person(currZone.GetName()), false,
                                             mobelCond,
-                                            localWriter);
+									localWriter,null);
                             localWriter.CopyTo(agentsOutputFile);
                         }
                     });
