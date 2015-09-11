@@ -93,14 +93,14 @@ namespace Samplers
                         OutputFileWriter currWriter)
         {
             int seltdDim = 0;
-			int seltAgnt = 0;
+            int seltAgnt = 0;
             List<ConditionalDistribution> condHhldList = currZone.GetDataHhldCompositeCollectionsListH();
-			List<ConditionalDistribution> condPerList = currZone.GetDataHhldCompositeCollectionsListP();
+            List<ConditionalDistribution> condPerList = currZone.GetDataHhldCompositeCollectionsListP();
 
             var generatedAgents = new List<SimulationObject>();
             HouseholdPersonComposite prevAgent = initAgent;
-			ImportanceSampler currImpSampler = new ImportanceSampler();
-			Random rnd = new Random();
+            ImportanceSampler currImpSampler = new ImportanceSampler();
+            Random rnd = new Random();
 
             int iter = 0;
             if (warmUpStatus == true)
@@ -115,45 +115,45 @@ namespace Samplers
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < iter; i++)
             {
-				// with equal probablity select one of the hhld or persons
-				seltAgnt = randGen.NextInRange(0, prevAgent.getPersons().Count());
-				//Change Hhld object
-				if (seltAgnt == 0) {
-					seltdDim = randGen.NextInRange(0, condHhldList.Count - 1);
-					ConditionalDistribution currDist = condHhldList[seltdDim];
+                // with equal probablity select one of the hhld or persons
+                seltAgnt = randGen.NextInRange(0, prevAgent.getPersons().Count());
+                //Change Hhld object
+                if (seltAgnt == 0) {
+                    seltdDim = randGen.NextInRange(0, condHhldList.Count - 1);
+                    ConditionalDistribution currDist = condHhldList[seltdDim];
 
-					var currComm = currDist.GetCommulativeValue (
-						prevAgent
-						, currZone, -1);
-					newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
-						currDist.GetDimensionName (), -1);
-				}
-				//Change person object
-				else {
-					seltdDim = randGen.NextInRange(0, condPerList.Count - 1);
-					ConditionalDistribution currDist = condPerList[seltdDim];
+                    var currComm = currDist.GetCommulativeValue (
+                        prevAgent
+                        , currZone, -1);
+                    newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
+                        currDist.GetDimensionName (), -1);
+                }
+                //Change person object
+                else {
+                    seltdDim = randGen.NextInRange(0, condPerList.Count - 1);
+                    ConditionalDistribution currDist = condPerList[seltdDim];
 
-					// Select randomly one person from the collection, whose attribute is changed
-					int personId = rnd.Next(0, prevAgent.getPersons().Count - 1);
+                    // Select randomly one person from the collection, whose attribute is changed
+                    int personId = rnd.Next(0, prevAgent.getPersons().Count - 1);
 
-					// Importance sampling for the Age
-					if (currDist.GetDimensionName() == "Age")
-					{
-						newAgent = (HouseholdPersonComposite) currImpSampler.GetNextAgent(
-							currZone.GetHousholdSizeDist(),
-							currDist, currDist.GetDimensionName(),
-							prevAgent, currZone, personId);
-					}
-					else
-					{
-						var currComm = currDist.GetCommulativeValue (
-							prevAgent
-							, currZone, personId);
-						newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
-							currDist.GetDimensionName (), personId);
-					}
-					//Consistency check
-					((HouseholdPersonComposite) newAgent).CheckConsistency();
+                    // Importance sampling for the Age
+                    if (currDist.GetDimensionName() == "Age")
+                    {
+                        newAgent = (HouseholdPersonComposite) currImpSampler.GetNextAgent(
+                            currZone.GetHousholdSizeDist(),
+                            currDist, currDist.GetDimensionName(),
+                            prevAgent, currZone, personId);
+                    }
+                    else
+                    {
+                        var currComm = currDist.GetCommulativeValue (
+                            prevAgent
+                            , currZone, personId);
+                        newAgent = (HouseholdPersonComposite)GenerateNextAgent (currComm, prevAgent,
+                            currDist.GetDimensionName (), personId);
+                    }
+                    //Consistency check
+                    ((HouseholdPersonComposite) newAgent).CheckConsistency();
                 }
 
                 prevAgent = newAgent;
@@ -370,7 +370,7 @@ namespace Samplers
         private SimulationObject GenerateNextAgent(List<KeyValPair> curCom,
             SimulationObject prvAgnt, string genDim, int personId)
         {
-			double currMax = (double)
+            double currMax = (double)
                 ((KeyValPair)curCom[curCom.Count - 1]).Value;
             if (currMax != 0.00)
             {
