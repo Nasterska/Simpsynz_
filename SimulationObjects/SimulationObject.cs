@@ -18,7 +18,6 @@ namespace SimulationObjects
     class SimulationObject
     {
         protected AgentType Type;
-
         public AgentType GetAgentType()
         {
             return Type;
@@ -27,6 +26,17 @@ namespace SimulationObjects
         {
             Type = curTyp;
         }
+
+		protected uint myID;
+		public uint GetAgentID()
+		{
+			return myID;
+		}
+		public void SetAgentID(uint currID)
+		{
+			myID = currID;
+		}
+
         public virtual string GetNewJointKey(string baseDim)
         {
             return "";
