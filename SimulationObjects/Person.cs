@@ -169,7 +169,7 @@ namespace SimulationObjects
             Sex = Sex.Male;
             EducationLevel = EducationLevel.primary;
             household = new Household();
-            Occupation = Occupation.TradesProfessional;
+            Occupation = Occupation.ManufacturingConstructionTrades;
             PublicTransitPass = PublicTransitPass.MetroPass;
             EmploymentStatus = EmploymentStatus.PartTime;
             DrivingLicense = DrivingLicense.No;
