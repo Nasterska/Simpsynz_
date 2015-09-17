@@ -2083,9 +2083,9 @@ namespace PopulationSynthesis.Utils
             int homePT = Convert.ToInt32(person.GetEmploymentStatus() == EmploymentStatus.PartTimeHome);
             int PT = Convert.ToInt32(person.GetEmploymentStatus() == EmploymentStatus.PartTime);
             int town = Convert.ToInt32(person.GetHhld().GetDwellingType() == DwellingType.Townhouse);
-            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.Construction);
-            int profMan = Convert.ToInt32(person.GetOccupation() == Occupation.TradesProfessional);
-            int retail = Convert.ToInt32(person.GetOccupation() == Occupation.TechnicalRetailSalesServiceNotEmployedUnknown);
+            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.ManufacturingConstructionTrades);
+            int profMan = Convert.ToInt32(person.GetOccupation() == Occupation.ProfessionalManagementTechnical);
+            int retail = Convert.ToInt32(person.GetOccupation() == Occupation.RetailSalesService);
             int oNE = Convert.ToInt32(person.GetEmploymentStatus() == EmploymentStatus.Unemployed);
             int eleven = Convert.ToInt32(person.GetAge() == Age.ElevenToThirteen);
             int sixteen = Convert.ToInt32(person.GetAge() == Age.SixteenToSeventeen);
@@ -2164,8 +2164,8 @@ namespace PopulationSynthesis.Utils
             int homePT = Convert.ToInt32(person.GetEmploymentStatus() == EmploymentStatus.PartTimeHome);
             int PT = Convert.ToInt32(person.GetEmploymentStatus() == EmploymentStatus.PartTime);
             int apart = Convert.ToInt32(person.GetHhld().GetDwellingType() == DwellingType.Apartment);
-            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.Construction);
-            int retail = Convert.ToInt32(person.GetOccupation() == Occupation.TechnicalRetailSalesServiceNotEmployedUnknown);
+            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.ManufacturingConstructionTrades);
+            int retail = Convert.ToInt32(person.GetOccupation() == Occupation.RetailSalesService);
             int sixteen = Convert.ToInt32(person.GetAge() == Age.SixteenToSeventeen);
             int eighteen = Convert.ToInt32(person.GetAge() == Age.EighteenToTwentyFive);
             int twentysix = Convert.ToInt32(person.GetAge() == Age.TwentySixToThirty);
@@ -2197,34 +2197,29 @@ namespace PopulationSynthesis.Utils
                                      + (double)valList[4]
                                      + (double)valList[5]);
             if (int.Parse(category) ==
-                (int)Occupation.GeneralOffice)
+                (int)Occupation.GeneralOfficeClerical)
             {
                 return ((double)valList[0] / logsum);
             }
             else if (int.Parse(category) ==
-                (int)Occupation.ClericalManufacturing)
+                (int)Occupation.ManufacturingConstructionTrades)
             {
                 return ((double)valList[1] / logsum);
             }
             else if (int.Parse(category) ==
-                (int)Occupation.Construction)
+                (int)Occupation.ProfessionalManagementTechnical)
             {
                 return ((double)valList[2] / logsum);
             }
             else if (int.Parse(category) ==
-                (int)Occupation.TradesProfessional)
+                (int)Occupation.RetailSalesService)
             {
                 return ((double)valList[3] / logsum);
             }
             else if (int.Parse(category) ==
-                (int)Occupation.Management)
+                (int)Occupation.NotEmployed)
             {
                 return ((double)valList[4] / logsum);
-            }
-            else if (int.Parse(category) ==
-                 (int)Occupation.TechnicalRetailSalesServiceNotEmployedUnknown)
-            {
-                return ((double)valList[5] / logsum);
             }
             return 0.00;
         }
@@ -2428,8 +2423,8 @@ namespace PopulationSynthesis.Utils
             int lNo = Convert.ToInt32(person.GetDrivingLicense() == DrivingLicense.No);
             int apart = Convert.ToInt32(person.GetHhld().GetDwellingType() == DwellingType.Apartment);
             int town = Convert.ToInt32(person.GetHhld().GetDwellingType() == DwellingType.Townhouse);
-            int profMan = Convert.ToInt32(person.GetOccupation() == Occupation.TradesProfessional);
-            int retail = Convert.ToInt32(person.GetOccupation() == Occupation.TechnicalRetailSalesServiceNotEmployedUnknown);
+            int profMan = Convert.ToInt32(person.GetOccupation() == Occupation.ProfessionalManagementTechnical);
+            int retail = Convert.ToInt32(person.GetOccupation() == Occupation.RetailSalesService);
 
 
             int eighteen = Convert.ToInt32(person.GetAge() == Age.EighteenToTwentyFive);
@@ -2446,7 +2441,7 @@ namespace PopulationSynthesis.Utils
                 + -1.32 * eighteen + -0.711 * twentysix + -0.325 * thirtyone + -0.252 * female + 0.247 * lNo));
 
 
-            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.Construction);
+            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.ManufacturingConstructionTrades);
             int eleven = Convert.ToInt32(person.GetAge() == Age.ElevenToThirteen);
             int fiftyone = Convert.ToInt32(person.GetAge() == Age.FiftyOneToFiftyFour);
             int sixteen = Convert.ToInt32(person.GetAge() == Age.SixteenToSeventeen);
@@ -2637,7 +2632,7 @@ namespace PopulationSynthesis.Utils
                 + 0.153 * female));
 
             int twoAdults = Convert.ToInt32(person.GetHhld().GetHhldSize() == HouseholdSize.Twoadults);
-            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.Construction);
+            int manConst = Convert.ToInt32(person.GetOccupation() == Occupation.ManufacturingConstructionTrades);
 
             currValues.Add(Math.Exp(-0.916 * 1.00 + 1.27 * twoAdults + -4.87 * twoAdultsChildren + 0.227 * oneCar + 0.214 * twoCars
                 + -0.138 * threePlusCars + 0.945 * manConst + 0.159 * female));
