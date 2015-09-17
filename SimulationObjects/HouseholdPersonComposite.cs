@@ -143,22 +143,22 @@ namespace SimulationObjects
 		}
 
 		//Occupation
-		private int count_general_office = 0;
+		private int count_general_office_clerical = 0;
 		public int Count_general_office
 		{
-			get { return count_general_office; }
+			get { return count_general_office_clerical; }
 		}
 
-		private int count_clerical_manufacturing = 0;
+		private int count_manufacturing_construction_trades = 0;
 		public int Count_clerical_manufacturing
 		{
-			get { return count_clerical_manufacturing; }
+			get { return count_manufacturing_construction_trades; }
 		}
 
-		private int count_costruction_man = 0;
+		private int count_not_employed = 0;
 		public int Count_costruction_man
 		{
-			get { return count_costruction_man; }
+			get { return count_not_employed; }
 		}
 
 		private int count_professional_man = 0;
@@ -281,29 +281,29 @@ namespace SimulationObjects
 				}
 				switch (person.GetOccupation())
 				{
-					case (Occupation.GeneralOffice):
+                    case (Occupation.GeneralOfficeClerical):
 						{
-							count_general_office++;
+							count_general_office_clerical++;
 							break;
 						}
-					case (Occupation.ClericalManufacturing):
+                    case (Occupation.ManufacturingConstructionTrades):
 						{
-							count_clerical_manufacturing++;
+							count_manufacturing_construction_trades++;
 							break;
 						}
-					case (Occupation.TradesProfessional):
+                    case (Occupation.ProfessionalManagementTechnical):
 						{
 							count_professional_man++;
 							break;
 						}
-					case (Occupation.TechnicalRetailSalesServiceNotEmployedUnknown):
+                    case (Occupation.RetailSalesService):
 						{
 							count_retail++;
 							break;
 						}
-					case (Occupation.Construction):
+                    case (Occupation.NotEmployed):
 						{
-							count_costruction_man++;
+							count_not_employed++;
 							break;
 						}
 				}
