@@ -2194,8 +2194,7 @@ namespace PopulationSynthesis.Utils
                                      + (double)valList[1]
                                      + (double)valList[2]
                                      + (double)valList[3]
-                                     + (double)valList[4]
-                                     + (double)valList[5]);
+                                     + (double)valList[4]);
             if (int.Parse(category) ==
                 (int)Occupation.GeneralOfficeClerical)
             {
