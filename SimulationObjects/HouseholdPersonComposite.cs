@@ -349,21 +349,17 @@ namespace SimulationObjects
 			}
 		}
 
-		public void CheckConsistency()
-		{
-			CheckSexConsisteny ();
-			CheckAgeConsistency ();
-		}
 
-		void CheckSexConsisteny()
+		public void CheckSexConsisteny(DiscreteMarginalDistribution sexMarginal)
 		{
 			Random myrand = new Random ();
 			double r = 0.0;
+			double mCnt = sexMarginal.GetValue ("0");
 			//Sex
 			if (persons.Count () > 1) {
 				if (persons [0].GetSex () == persons [1].GetSex ()) {
 					r = myrand.NextDouble ();
-					if (r < 0.5) {
+					if (r < mCnt) {
 						persons [0].SetSex(Sex.Male);
 						persons [1].SetSex(Sex.Female);
 					} else {
@@ -373,7 +369,7 @@ namespace SimulationObjects
 				}
 			}else if (persons.Count () == 1) {
 				r = myrand.NextDouble ();
-				if (r < 0.49) {
+				if (r < mCnt) {
 					persons [0].SetSex(Sex.Male);
 				} else {
 					persons [0].SetSex(Sex.Female);

@@ -91,15 +91,16 @@ namespace SimulationObjects
 
         public void LoadZonalData(AgentType currType)
         {
-            if (currType == AgentType.Household)
+			if (currType == AgentType.Household || currType == AgentType.HouseholdPersonComposite)
             {
-                LoadMobelData();
+                //LoadMobelData();
                 //updated
                 LoadMarginalsForCars();
                 //updated
                 LoadMarginalsForDwellings();
-                LoadMarginalsForPersons();
-
+                //LoadMarginalsForPersons();
+				LoadMarginalsForAge();
+				LoadMarginalsForSex ();
             }
             /*else if(currType == AgentType.Person)
             {
@@ -1435,7 +1436,7 @@ namespace SimulationObjects
         // [BF] make it proper
         private void LoadMarginalsForDwellings()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Household\\Household Z-Stats.csv")))
+            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Household Z-Stats.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
@@ -1475,7 +1476,7 @@ namespace SimulationObjects
 
         private void LoadMarginalsForCars()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Household\\Household Z-Stats.csv")))
+            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Household Z-Stats.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
@@ -1516,7 +1517,7 @@ namespace SimulationObjects
 
         private void LoadMarginalsForPersons()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Household\\CensusNumOfPers.csv")))
+            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "CensusNumOfPers.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
@@ -1570,7 +1571,7 @@ namespace SimulationObjects
 
         private void LoadMarginalsForHhldSize2()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\CensusHhldSize2Marginal.csv")))
+            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "CensusHhldSize2Marginal.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
@@ -1628,7 +1629,7 @@ namespace SimulationObjects
 
         private void LoadMarginalsForAge()
         {
-			using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\Person Z-Stats.csv")))
+			using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person Z-Stats.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
@@ -1710,7 +1711,7 @@ namespace SimulationObjects
 
         private void LoadMarginalsForSex()
         {
-			using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\Person Z-Stats.csv")))
+			using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person Z-Stats.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();
@@ -1743,7 +1744,7 @@ namespace SimulationObjects
 
         private void LoadMarginalsForEducation()
         {
-            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "Person\\CensusEducationMarginal.csv")))
+            using (TextReader myFileReader = new StreamReader(Path.Combine(Constants.DATA_DIR, "CensusEducationMarginal.csv")))
             {
                 string strTok;
                 myFileReader.ReadLine();

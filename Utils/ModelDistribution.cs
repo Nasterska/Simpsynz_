@@ -2468,10 +2468,11 @@ namespace PopulationSynthesis.Utils
                                  Person person)
         {
             var valList = GetUtilityValuesForAge(person);
-            double logsum = ((double)valList[0]
-                                     + (double)valList[1]
-                                     + (double)valList[2]
-                                     + (double)valList[3]
+            //double logsum = ((double)valList[0]
+            //                         + (double)valList[1]
+            //                         + (double)valList[2]
+            //                         + (double)valList[3]
+			double logsum = ((double)valList[3]
                                      + (double)valList[4]
                                      + (double)valList[5]
                                      + (double)valList[6]
@@ -2482,17 +2483,20 @@ namespace PopulationSynthesis.Utils
             if (int.Parse(category) ==
                 (int)Age.LessThanEleven)
             {
-                return ((double)valList[0] / logsum);
+				return 0.00;
+                //return ((double)valList[0] / logsum);
             }
             else if (int.Parse(category) ==
                 (int)Age.ElevenToThirteen)
             {
-                return ((double)valList[1] / logsum);
+				return 0.00;
+                //return ((double)valList[1] / logsum);
             }
             else if (int.Parse(category) ==
                 (int)Age.FourteenToFifteen)
             {
-                return ((double)valList[2] / logsum);
+				return 0.00;
+                //return ((double)valList[2] / logsum);
             }
             else if (int.Parse(category) ==
                 (int)Age.SixteenToSeventeen)

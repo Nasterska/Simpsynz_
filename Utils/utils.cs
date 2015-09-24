@@ -29,13 +29,13 @@ namespace PopulationSynthesis.Utils
         public static string CONDITIONAL_GENERIC = "...";
 
         public static int WARMUP_ITERATIONS = 20000;
-        public static int SKIP_ITERATIONS = 20;
+        public static int SKIP_ITERATIONS = 30;
         public static int POOL_COUNT = 20;
 
         public static double BFRANC_TO_EURO = 40.3399;
         
         public static string DATA_DIR = 
-                @"D:\Waterfront\PopSynth\Code\PopulationSynthesis\InputData";
-    }
+			@"D:\Waterfront\PopSynth\Code\PopulationSynthesis\InputData";
+	}
 
 }

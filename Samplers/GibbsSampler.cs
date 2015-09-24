@@ -143,7 +143,7 @@ namespace Samplers
 					if (currDist.GetDimensionName() == "Age")
 					{
 						newAgent = (HouseholdPersonComposite) currImpSampler.GetNextAgent(
-							currZone.GetHousholdSizeDist(),
+							currZone.GetPersonAgeMarginal(),
 							currDist, currDist.GetDimensionName(),
 							prevAgent, currZone, personId);
 					}
@@ -156,7 +156,7 @@ namespace Samplers
 							currDist.GetDimensionName (), personId);
 					}
 					//Consistency check
-					((HouseholdPersonComposite) newAgent).CheckConsistency();
+					((HouseholdPersonComposite) newAgent).CheckSexConsisteny(currZone.GetPersonSexMarginal());
                 }
 
                 prevAgent = newAgent;
